@@ -1,7 +1,7 @@
 package com.uninter.biblioteca.model.entity;
 
+import com.uninter.biblioteca.model.enums.Status;
 import jakarta.persistence.*;
-import org.springframework.dao.DataAccessException;
 
 import java.util.Date;
 

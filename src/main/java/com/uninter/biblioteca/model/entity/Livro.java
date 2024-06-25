@@ -1,5 +1,6 @@
 package com.uninter.biblioteca.model.entity;
 
+import com.uninter.biblioteca.model.enums.Disponibilidade;
 import jakarta.persistence.*;
 
 // tabela livro

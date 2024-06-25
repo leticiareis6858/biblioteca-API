@@ -1,4 +1,4 @@
-package com.uninter.biblioteca.model.entity;
+package com.uninter.biblioteca.model.enums;
 
 public enum Cargo {
     ADMIN,
