@@ -3,6 +3,7 @@ package com.uninter.biblioteca.service;
 import com.uninter.biblioteca.model.entity.Usuario;
 import com.uninter.biblioteca.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +14,11 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public Usuario criarUsuario(Usuario usuario) {
+        usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
         return usuarioRepository.save(usuario);
     }
 
@@ -32,7 +37,7 @@ public class UsuarioService {
             usuarioExistente.setEmail(usuario.getEmail());
         }
         if (usuario.getSenha() != null) {
-            usuarioExistente.setSenha(usuario.getSenha());
+            usuarioExistente.setSenha(passwordEncoder.encode(usuario.getSenha()));
         }
         if (usuario.getCargo() != null) {
             usuarioExistente.setCargo(usuario.getCargo());
