@@ -1,7 +1,7 @@
 package com.uninter.biblioteca.service;
 
 import com.uninter.biblioteca.model.entity.Emprestimo;
-import com.uninter.biblioteca.model.repository.EmprestimoRepository;
+import com.uninter.biblioteca.repository.EmprestimoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
 package com.uninter.biblioteca.service;
 
 import com.uninter.biblioteca.model.entity.Usuario;
-import com.uninter.biblioteca.model.repository.UsuarioRepository;
+import com.uninter.biblioteca.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

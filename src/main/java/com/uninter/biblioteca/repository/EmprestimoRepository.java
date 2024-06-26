@@ -1,4 +1,4 @@
-package com.uninter.biblioteca.model.repository;
+package com.uninter.biblioteca.repository;
 
 import com.uninter.biblioteca.model.entity.Emprestimo;
 import org.springframework.data.jpa.repository.JpaRepository;

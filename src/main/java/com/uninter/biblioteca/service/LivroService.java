@@ -1,7 +1,7 @@
 package com.uninter.biblioteca.service;
 
 import com.uninter.biblioteca.model.entity.Livro;
-import com.uninter.biblioteca.model.repository.LivroRepository;
+import com.uninter.biblioteca.repository.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
