@@ -20,7 +20,7 @@ public class Livro {
     @Column(name="autor", nullable=false, length=100)
     private String autor;
 
-    @Column(name="isbn", nullable=false, length=17)
+    @Column(name="isbn", nullable=false, length=17, unique = true)
     private String isbn;
 
     @Column(name="genero", nullable=false, length=60)
