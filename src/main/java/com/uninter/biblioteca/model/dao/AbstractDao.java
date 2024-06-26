@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
+import com.uninter.biblioteca.model.entity.Emprestimo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -21,12 +22,14 @@ public abstract class AbstractDao<T, PK extends Serializable> {
         return entityManager;
     }
 
-    public void save(T entity) {
+    public Emprestimo save(T entity) {
         entityManager.persist(entity);
+        return null;
     }
 
-    public void update(T entity) {
+    public Emprestimo update(T entity) {
         entityManager.merge(entity);
+        return null;
     }
 
     public void delete(PK id) {

@@ -6,9 +6,10 @@ import java.util.List;
 
 @Service
 public interface UsuarioDao {
-    void save(Usuario usuario);
-    void update(Usuario usuario);
+    Usuario save(Usuario usuario);
+    Usuario update(Usuario usuario);
     void delete(Long id);
     Usuario findById(Long id);
+    Usuario findByEmail(String email);
     List<Usuario> findAll();
 }
