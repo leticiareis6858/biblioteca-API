@@ -2,8 +2,10 @@ package com.uninter.biblioteca;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+@ComponentScan(basePackages = {"com.uninter.biblioteca.config","com.uninter.biblioteca.controller", "com.uninter.biblioteca.model", "com.uninter.biblioteca.repository","com.uninter.biblioteca.service"})
 public class BibliotecaApiApplication {
 
 	public static void main(String[] args) {
