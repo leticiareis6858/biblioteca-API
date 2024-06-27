@@ -1,13 +1,25 @@
 package com.uninter.biblioteca.controller.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.uninter.biblioteca.model.enums.Status;
 
 
 public class EmprestimoDTO {
+
     private Long usuario_id;
+
     private Long livro_id;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    @JsonProperty("data_emprestimo")
     private String dataEmprestimo;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    @JsonProperty("data_devolucao")
     private String dataDevolucao;
+
     private Status status;
 
     public Long getUsuario_id() {
