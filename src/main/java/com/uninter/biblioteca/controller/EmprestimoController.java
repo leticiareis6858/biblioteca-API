@@ -1,5 +1,6 @@
 package com.uninter.biblioteca.controller;
 
+import com.uninter.biblioteca.controller.dto.EmprestimoDTO;
 import com.uninter.biblioteca.model.entity.Emprestimo;
 import com.uninter.biblioteca.service.EmprestimoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,8 @@ public class EmprestimoController {
     private EmprestimoService emprestimoService;
 
     @PostMapping("/criar")
-    public ResponseEntity<Emprestimo> criarEmprestimo(@RequestBody Emprestimo emprestimo) {
-        Emprestimo novoEmprestimo = emprestimoService.criarEmprestimo(emprestimo);
+    public ResponseEntity<Emprestimo> criarEmprestimo(@RequestBody EmprestimoDTO emprestimoDTO) {
+        Emprestimo novoEmprestimo = emprestimoService.criarEmprestimo(emprestimoDTO);
         return ResponseEntity.ok(novoEmprestimo);
     }
 
