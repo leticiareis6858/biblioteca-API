@@ -28,6 +28,13 @@ public class EmprestimoController {
         Emprestimo emprestimoAtualizado = emprestimoService.atualizarEmprestimo(emprestimo);
         return ResponseEntity.ok(emprestimoAtualizado);
     }
+
+    @PutMapping("/devolver/{id}")
+    public ResponseEntity<Emprestimo> devolverEmprestimo(@PathVariable Long id){
+        Emprestimo emprestimoDevolvido = emprestimoService.devolverEmprestimo(id);
+        return ResponseEntity.ok(emprestimoDevolvido);
+    }
+
     @DeleteMapping("/excluir/{id}")
     public ResponseEntity<Void> removerEmprestimo(@PathVariable Long id) {
         emprestimoService.removerEmprestimo(id);

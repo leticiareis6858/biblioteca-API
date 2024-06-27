@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Date;
 import java.text.ParseException;
 
+import static com.uninter.biblioteca.model.enums.Disponibilidade.DISPONIVEL;
 import static com.uninter.biblioteca.model.enums.Disponibilidade.INDISPONIVEL;
+import static com.uninter.biblioteca.model.enums.Status.DEVOLVIDO;
 import static com.uninter.biblioteca.model.enums.Status.PENDENTE;
 
 @Service
@@ -104,6 +106,29 @@ public class EmprestimoService {
 
     public Emprestimo atualizarEmprestimo(Emprestimo emprestimo) {
         return emprestimoRepository.save(emprestimo);
+    }
+
+    public Emprestimo devolverEmprestimo(Long id) {
+        Emprestimo emprestimoDevolvido = emprestimoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Emprestimo não encontrado"));
+
+        if(emprestimoDevolvido.getStatus()==DEVOLVIDO){
+            throw new RuntimeException("Emprestimo já devolvido!");
+        }
+
+        if(emprestimoDevolvido.getLivro().getDisponibilidade()==DISPONIVEL){
+            throw new RuntimeException("Livro já devolvido!");
+        }
+
+        if(emprestimoDevolvido.getStatus()==DEVOLVIDO && emprestimoDevolvido.getLivro().getDisponibilidade()==DISPONIVEL){
+            throw new RuntimeException("Emprestimo e Livro já devolvidos!");
+        }
+
+        emprestimoDevolvido.setStatus(DEVOLVIDO);
+        emprestimoDevolvido.getLivro().setDisponibilidade(DISPONIVEL);
+        emprestimoDevolvido.setData_devolucao(new Date());
+
+        return emprestimoRepository.save(emprestimoDevolvido);
     }
 
     public void removerEmprestimo(Long id) {
