@@ -51,7 +51,7 @@ public class EmprestimoService {
         Livro livro = livroRepository.findById(emprestimoDTO.getLivro_id())
                 .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
 
-        if(livro.getDisponibilidade()==INDISPONIVEL){
+        if (livro.getDisponibilidade() == INDISPONIVEL) {
             throw new RuntimeException("Livro indisponível para emprestimo");
         }
 
@@ -104,23 +104,50 @@ public class EmprestimoService {
         return emprestimoRepository.save(emprestimo);
     }
 
-    public Emprestimo atualizarEmprestimo(Emprestimo emprestimo) {
-        return emprestimoRepository.save(emprestimo);
+    public Emprestimo atualizarEmprestimo(Long id, Emprestimo emprestimo) {
+        Emprestimo emprestimoExistente = emprestimoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Emprestimo não encontrado com o ID: " + id));
+
+        if (emprestimo.getUsuario() != null) {
+            usuarioRepository.findById(emprestimo.getUsuario().getId())
+                    .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+            emprestimoExistente.setUsuario(emprestimo.getUsuario());
+        }
+
+        if (emprestimo.getLivro() != null) {
+            livroRepository.findById(emprestimo.getLivro().getId())
+                    .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
+            emprestimoExistente.setLivro(emprestimo.getLivro());
+        }
+
+        if (emprestimo.getData_emprestimo() != null) {
+            emprestimoExistente.setData_emprestimo(emprestimo.getData_emprestimo());
+        }
+
+        if (emprestimo.getData_devolucao() != null) {
+            emprestimoExistente.setData_devolucao(emprestimo.getData_devolucao());
+        }
+
+        if (emprestimo.getStatus() != null) {
+            emprestimoExistente.setStatus(emprestimo.getStatus());
+        }
+
+        return emprestimoRepository.save(emprestimoExistente);
     }
 
     public Emprestimo devolverEmprestimo(Long id) {
         Emprestimo emprestimoDevolvido = emprestimoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Emprestimo não encontrado"));
 
-        if(emprestimoDevolvido.getStatus()==DEVOLVIDO){
+        if (emprestimoDevolvido.getStatus() == DEVOLVIDO) {
             throw new RuntimeException("Emprestimo já devolvido!");
         }
 
-        if(emprestimoDevolvido.getLivro().getDisponibilidade()==DISPONIVEL){
+        if (emprestimoDevolvido.getLivro().getDisponibilidade() == DISPONIVEL) {
             throw new RuntimeException("Livro já devolvido!");
         }
 
-        if(emprestimoDevolvido.getStatus()==DEVOLVIDO && emprestimoDevolvido.getLivro().getDisponibilidade()==DISPONIVEL){
+        if (emprestimoDevolvido.getStatus() == DEVOLVIDO && emprestimoDevolvido.getLivro().getDisponibilidade() == DISPONIVEL) {
             throw new RuntimeException("Emprestimo e Livro já devolvidos!");
         }
 

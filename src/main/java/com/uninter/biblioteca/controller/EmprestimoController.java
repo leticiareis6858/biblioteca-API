@@ -25,7 +25,7 @@ public class EmprestimoController {
     @PutMapping("/atualizar/{id}")
     public ResponseEntity<Emprestimo> atualizarEmprestimo(@PathVariable Long id, @RequestBody Emprestimo emprestimo) {
         emprestimo.setId(id);
-        Emprestimo emprestimoAtualizado = emprestimoService.atualizarEmprestimo(emprestimo);
+        Emprestimo emprestimoAtualizado = emprestimoService.atualizarEmprestimo(id, emprestimo);
         return ResponseEntity.ok(emprestimoAtualizado);
     }
 
