@@ -1,8 +1,8 @@
 package com.uninter.biblioteca.service;
 
 import com.uninter.biblioteca.model.entity.Livro;
-import com.uninter.biblioteca.model.enums.Disponibilidade;
-import static com.uninter.biblioteca.model.enums.Disponibilidade.DISPONIVEL;
+
+import static com.uninter.biblioteca.model.enumeration.Disponibilidade.DISPONIVEL;
 import com.uninter.biblioteca.repository.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -2,8 +2,7 @@ package com.uninter.biblioteca.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.uninter.biblioteca.model.enums.Status;
+import com.uninter.biblioteca.model.enumeration.Status;
 
 
 public class EmprestimoDTO {

@@ -1,6 +1,6 @@
 package com.uninter.biblioteca.model.entity;
 
-import com.uninter.biblioteca.model.enums.Cargo;
+import com.uninter.biblioteca.model.enumeration.Cargo;
 import jakarta.persistence.*;
 
 // tabela usuario

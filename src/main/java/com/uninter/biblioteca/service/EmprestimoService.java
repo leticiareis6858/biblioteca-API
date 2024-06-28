@@ -17,10 +17,10 @@ import java.util.List;
 import java.util.Date;
 import java.text.ParseException;
 
-import static com.uninter.biblioteca.model.enums.Disponibilidade.DISPONIVEL;
-import static com.uninter.biblioteca.model.enums.Disponibilidade.INDISPONIVEL;
-import static com.uninter.biblioteca.model.enums.Status.DEVOLVIDO;
-import static com.uninter.biblioteca.model.enums.Status.PENDENTE;
+import static com.uninter.biblioteca.model.enumeration.Disponibilidade.DISPONIVEL;
+import static com.uninter.biblioteca.model.enumeration.Disponibilidade.INDISPONIVEL;
+import static com.uninter.biblioteca.model.enumeration.Status.DEVOLVIDO;
+import static com.uninter.biblioteca.model.enumeration.Status.PENDENTE;
 
 @Service
 public class EmprestimoService {
