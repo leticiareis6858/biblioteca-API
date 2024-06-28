@@ -6,7 +6,7 @@ Aplicação feita para a disciplina de **_Linguagem de Programação_** da _UNIN
 
 ## 🚀 Tecnologias:
 
-Esse projeto foi desenvolvido usando as seguintes tecnologias: _Java 17_, _Spring Boot_, MySQL Workbench_, _Maven_, _IntelliJ IDEA_.
+Esse projeto foi desenvolvido usando as seguintes tecnologias: _Java 17_, _Spring Boot_, _MySQL Workbench_, _Maven_, _IntelliJ IDEA_.
 
 ## 💻 Pré-requisitos:
 
@@ -24,7 +24,7 @@ Com essa aplicação é possivel:
 
 ## 🛠️ Como configurar a aplicação:
 
-1. Clone o repositório ou faça o download do arquivo zip.
+1. Faça o download do arquivo zip do repositório.
 2. Descompacte o arquivo zip.
 3. Importe o projeto como um _Maven Project_ em uma IDE de sua escolha.
 4. Em `src/main/resources/application.properties` configure as variáveis `spring.datasource.username` e `spring.datasource.password` de acordo com as informações do seu banco de dados.

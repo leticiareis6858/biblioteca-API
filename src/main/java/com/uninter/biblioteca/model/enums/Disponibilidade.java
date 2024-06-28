@@ -1,4 +1,4 @@
-package com.uninter.biblioteca.model.enums;
+package com.uninter.biblioteca.model.enumeration;
 
 public enum Disponibilidade {
     DISPONIVEL,
