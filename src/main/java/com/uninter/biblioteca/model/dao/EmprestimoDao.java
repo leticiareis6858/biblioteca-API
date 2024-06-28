@@ -4,7 +4,7 @@ import com.uninter.biblioteca.model.entity.Emprestimo;
 
 import java.util.List;
 
-public interface EmprestimoDao extends Dao<Emprestimo, Long>{
+public interface EmprestimoDao {
     Emprestimo save(Emprestimo emprestimo);
     Emprestimo update(Emprestimo emprestimo);
     void delete(Long id);

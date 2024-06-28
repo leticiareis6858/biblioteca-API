@@ -1,12 +1,10 @@
 package com.uninter.biblioteca.service;
 
-import com.uninter.biblioteca.model.dao.LivroDao;
 import com.uninter.biblioteca.model.entity.Livro;
 
 import static com.uninter.biblioteca.model.enumeration.Disponibilidade.DISPONIVEL;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import com.uninter.biblioteca.repository.LivroRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,62 +12,51 @@ import java.util.List;
 @Service
 public class LivroService {
 
-    private final LivroDao dao;
-
-    @Autowired
-    public LivroService(@Qualifier("livroDao") LivroDao dao) {
-        this.dao = dao;
-    }
+    private LivroRepository livroRepository;
 
     public Livro adicionarLivro(Livro livro) {
-        if (livro.getDisponibilidade() == null) {
+        if(livro.getDisponibilidade()==null){
             livro.setDisponibilidade(DISPONIVEL);
         }
-
-        dao.save(livro);
-        return livro;
+        return livroRepository.save(livro);
     }
 
     public Livro atualizarLivro(Long id, Livro livro) {
-        Livro livroExistente = dao.findById(id);
-        if (livroExistente != null) {
-            if (livro.getTitulo() != null) {
-                livroExistente.setTitulo(livro.getTitulo());
-            }
-            if (livro.getAutor() != null) {
-                livroExistente.setAutor(livro.getAutor());
-            }
-            if (livro.getIsbn() != null) {
-                livroExistente.setIsbn(livro.getIsbn());
-            }
-            if (livro.getGenero() != null) {
-                livroExistente.setGenero(livro.getGenero());
-            }
-            if (livro.getDisponibilidade() != null) {
-                livroExistente.setDisponibilidade(livro.getDisponibilidade());
-            }
+        Livro livroExistente = livroRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Livro não encontrado com o ID: " + id));
 
-            return dao.update(livroExistente);
-        } else {
-            throw new RuntimeException("Livro não encontrado com o ID: " + id);
+        if (livro.getTitulo() != null) {
+            livroExistente.setTitulo(livro.getTitulo());
         }
 
+        if (livro.getAutor() != null) {
+            livroExistente.setAutor(livro.getAutor());
+        }
+
+        if (livro.getIsbn() != null) {
+            livroExistente.setIsbn(livro.getIsbn());
+        }
+
+        if (livro.getGenero() != null) {
+            livroExistente.setGenero(livro.getGenero());
+        }
+
+        if (livro.getDisponibilidade() != null) {
+            livroExistente.setDisponibilidade(livro.getDisponibilidade());
+        }
+
+        return livroRepository.save(livroExistente);
     }
 
     public void removerLivro(Long id) {
-        dao.delete(id);
+        livroRepository.deleteById(id);
     }
 
     public Livro obterLivroPorId(Long id) {
-        Livro livroExistente = dao.findById(id);
-        if (livroExistente != null) {
-            return livroExistente;
-        } else {
-            throw new RuntimeException("Livro não encontrado com o ID: " + id);
-        }
+        return livroRepository.findById(id).orElse(null);
     }
 
     public List<Livro> obterTodosLivros() {
-        return dao.findAll();
+        return livroRepository.findAll();
     }
 }
