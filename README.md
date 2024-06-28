@@ -6,7 +6,7 @@ Aplicação feita para a disciplina de **_Linguagem de Programação_** da _UNIN
 
 ## 🚀 Tecnologias:
 
-Esse projeto foi desenvolvido usando as seguintes tecnologias: _Java 17_, _Spring Boot_, _MySQL Workbench_, _Maven_, _IntelliJ IDEA_.
+Esse projeto foi desenvolvido usando as seguintes tecnologias: _Java 17_, _Spring Boot_, _Spring Docs_, _MySQL Workbench_, _Maven_, _IntelliJ IDEA_.
 
 ## 💻 Pré-requisitos:
 
@@ -34,4 +34,4 @@ Com essa aplicação é possivel:
 
 1. Execute a classe `BibliotecaApiAplication.java`.
 2. Utilize o _Postman_ para usar as rotas da aplicação.
-3. Acesse `http://localhost:8080/docs` para verificar as rotas da API.
+3. Acesse `http://localhost:8080/swagger-ui.html` para verificar as rotas da API.
