@@ -4,16 +4,14 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-import com.uninter.biblioteca.model.entity.Emprestimo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 
-public abstract class AbstractDao<T, PK extends Serializable> {
+public abstract class AbstractDao<T, PK extends Serializable> implements Dao<T, PK> {
 
     @SuppressWarnings("unchecked")
-    private final Class<T> entityClass =
-            (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+    private final Class<T> entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -22,12 +20,12 @@ public abstract class AbstractDao<T, PK extends Serializable> {
         return entityManager;
     }
 
-    public Emprestimo save(T entity) {
+    public T save(T entity) {
         entityManager.persist(entity);
-        return null;
+        return entity;
     }
 
-    public Emprestimo update(T entity) {
+    public T update(T entity) {
         entityManager.merge(entity);
         return null;
     }
@@ -41,9 +39,7 @@ public abstract class AbstractDao<T, PK extends Serializable> {
     }
 
     public List<T> findAll() {
-        return entityManager
-                .createQuery("from " + entityClass.getSimpleName(), entityClass)
-                .getResultList();
+        return entityManager.createQuery("from " + entityClass.getSimpleName(), entityClass).getResultList();
     }
 
     protected List<T> createQuery(String jpql, Object... params) {

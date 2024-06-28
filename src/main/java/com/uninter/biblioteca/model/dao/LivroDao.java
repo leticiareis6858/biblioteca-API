@@ -1,9 +1,12 @@
 package com.uninter.biblioteca.model.dao;
 
 import com.uninter.biblioteca.model.entity.Livro;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
-public interface LivroDao {
+@Repository
+public interface LivroDao extends Dao<Livro, Long>{
     Livro save(Livro livro);
     Livro update(Livro livro);
     void delete(Long id);
