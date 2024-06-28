@@ -1,6 +1,8 @@
 package com.uninter.biblioteca.service;
 
 import com.uninter.biblioteca.model.entity.Livro;
+import com.uninter.biblioteca.model.enums.Disponibilidade;
+import static com.uninter.biblioteca.model.enums.Disponibilidade.DISPONIVEL;
 import com.uninter.biblioteca.repository.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,11 @@ public class LivroService {
     private LivroRepository livroRepository;
 
     public Livro adicionarLivro(Livro livro) {
+
+        if(livro.getDisponibilidade()==null){
+            livro.setDisponibilidade(DISPONIVEL);
+        }
+
         return livroRepository.save(livro);
     }
 
@@ -20,7 +27,6 @@ public class LivroService {
         Livro livroExistente = livroRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Livro não encontrado com o ID: " + id));
 
-        // Atualize apenas os campos não nulos do livro existente com os novos valores
         if (livro.getTitulo() != null) {
             livroExistente.setTitulo(livro.getTitulo());
         }
