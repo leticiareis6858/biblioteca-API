@@ -36,9 +36,9 @@ public class EmprestimoController {
     }
 
     @DeleteMapping("/excluir/{id}")
-    public ResponseEntity<Void> removerEmprestimo(@PathVariable Long id) {
+    public ResponseEntity<String> removerEmprestimo(@PathVariable Long id) {
         emprestimoService.removerEmprestimo(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("Emprestimo excluido com sucesso!");
     }
 
     @GetMapping("/{id}")
