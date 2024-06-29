@@ -6,7 +6,7 @@ Aplicação feita para a disciplina de **_Linguagem de Programação_** da _UNIN
 
 ## 🚀 Tecnologias:
 
-Esse projeto foi desenvolvido usando as seguintes tecnologias: _Java 17_, _Spring Boot_, _Spring Docs_, _MySQL Workbench_, _Maven_, _IntelliJ IDEA_.
+Esse projeto foi desenvolvido usando as seguintes tecnologias: _Java 17_, _Spring Boot_, _Spring Doc_, _MySQL Workbench_, _Maven_, _IntelliJ IDEA_.
 
 ## 💻 Pré-requisitos:
 
@@ -28,7 +28,7 @@ Com essa aplicação é possivel:
 2. Descompacte o arquivo zip.
 3. Importe o projeto como um _Maven Project_ em uma IDE de sua escolha.
 4. Em `src/main/resources/application.properties` configure as variáveis `spring.datasource.username` e `spring.datasource.password` de acordo com as informações do seu banco de dados.
-5. Importe a collection do Postman que é o arquivo `postman`.
+5. Importe a collection do Postman, que é o arquivo `Biblioteca-API.postman_collection.json`.
 
 ## 👩‍💻 Como usar:
 
