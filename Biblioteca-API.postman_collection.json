@@ -1,0 +1,451 @@
+{
+	"info": {
+		"_postman_id": "fb53e6fe-e2f9-4f0c-85f7-9da2acc5c19d",
+		"name": "Biblioteca-API",
+		"description": "Collection para uma REST API de uma biblioteca.\n\nDesenvolvido por Ana Leticia V.R. de Carvalho para a disciplina de Linguagem de Programação.\n\nCódigo da API disponível em: [https://github.com/leticiareis6858/biblioteca-API](https://github.com/leticiareis6858/biblioteca-API)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28633710"
+	},
+	"item": [
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Criar usuário",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\":\"\",\r\n    \"email\":\"\",\r\n    \"senha\":\"\",\r\n    \"cargo\":\"\"\r\n}\r\n// Cargo pode ser: ADMIN, BIBLIOTECARIO, LEITOR",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/usuarios/criar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuarios",
+								"criar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atualizar usuário",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\":\"\",\r\n    \"email\":\"\",\r\n    \"senha\":\"\",\r\n    \"cargo\":\"\"\r\n}\r\n\r\n// Pode atualizar quantos e quaisquer campos",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/usuarios/atualizar/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuarios",
+								"atualizar",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "excluir usuário",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/usuarios/excluir/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuarios",
+								"excluir",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar usuário por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/usuarios/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuarios",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar todos os usuários",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/usuarios",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Rotas para criar, atualizar, excluir ou buscar usuários."
+		},
+		{
+			"name": "Livro",
+			"item": [
+				{
+					"name": "criar livro",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\":\"\",\r\n    \"autor\":\"\",\r\n    \"isbn\":\"\",\r\n    \"genero\":\"\"\r\n}\r\n\r\n// Não é necessário informar a disponibilidade.\r\n// Disponibilidade pode ser: DISPONIVEL ou INDISPONIVEL",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/livros/adicionar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"livros",
+								"adicionar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atualizar livro",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\":\"\",\r\n    \"autor\":\"\",\r\n    \"isbn\":\"\",\r\n    \"genero\":\"\"\r\n}\r\n\r\n// Pode atualizar quantos e quaisquer campos",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/livros/atualizar/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"livros",
+								"atualizar",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "excluir livro",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/livros/excluir/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"livros",
+								"excluir",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar livro por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/livros/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"livros",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar todos os livros",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/livros",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"livros"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Rotas para criar, atualizar, excluir ou buscar livros."
+		},
+		{
+			"name": "Emprestimo",
+			"item": [
+				{
+					"name": "criar emprestimo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuario_id\": ,\r\n    \"livro_id\": ,\r\n}\r\n\r\n// Não precisa informar a data_devolucao e nem a data_criacao\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/emprestimos/criar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"emprestimos",
+								"criar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "devolver emprestimo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/emprestimos/devolver/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"emprestimos",
+								"devolver",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atualizar emprestimo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuario_id\": ,\r\n    \"livro_id\": ,\r\n    \"data_criacao\": \"dd-mm-yyyy\",\r\n    \"data_devolucao\": \"dd-mm-yyyy\"\r\n}\r\n\r\n// Pode atualizar quantos e quaisquer campos\r\n// As datas precisam estar no formato dd-mm-yyyy",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/emprestimos/atualizar/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"emprestimos",
+								"atualizar",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "excluir emprestimo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/emprestimos/excluir/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"emprestimos",
+								"excluir",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar emprestimo por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/emprestimos/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"emprestimos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar todos os emprestimos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/emprestimos",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"emprestimos"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Rotas para criar, atualizar, excluir ou buscar emprestimos."
+		}
+	]
+}
