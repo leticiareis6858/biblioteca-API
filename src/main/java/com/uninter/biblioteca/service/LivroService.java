@@ -14,6 +14,11 @@ public class LivroService {
 
     private LivroRepository livroRepository;
 
+    public LivroService(LivroRepository livroRepository) {
+        this.livroRepository = livroRepository;
+    }
+
+
     public Livro adicionarLivro(Livro livro) {
         if(livro.getDisponibilidade()==null){
             livro.setDisponibilidade(DISPONIVEL);
