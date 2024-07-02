@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+// classe de serviço para usuario
 @Service
 public class UsuarioService {
 
@@ -17,11 +18,13 @@ public class UsuarioService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    // método para criar um usuario
     public Usuario criarUsuario(Usuario usuario) {
         usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
         return usuarioRepository.save(usuario);
     }
 
+    // método para adicionar um usuario
     public Usuario atualizarUsuario(Long id, Usuario usuario) {
         Usuario usuarioExistente = usuarioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado com o ID: " + id));
@@ -49,14 +52,17 @@ public class UsuarioService {
         return usuarioRepository.save(usuarioExistente);
     }
 
+    // método para excluir um usuario
     public void removerUsuario(Long id) {
         usuarioRepository.deleteById(id);
     }
 
+    // método para obter um usuario pelo seu id
     public Usuario obterUsuarioPorId(Long id) {
         return usuarioRepository.findById(id).orElse(null);
     }
 
+    // método para obter todos os usuarios
     public List<Usuario> obterTodosUsuarios() {
         return usuarioRepository.findAll();
     }

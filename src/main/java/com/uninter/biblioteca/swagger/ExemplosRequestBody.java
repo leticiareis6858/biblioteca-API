@@ -1,5 +1,7 @@
 package com.uninter.biblioteca.swagger;
 
+// classe que contém os exemplos de request body da aplicação
+// tais exemplos são usados na documentação do swagger
 public class ExemplosRequestBody {
 
     public static final String criarEmprestimoBody="{\n" +

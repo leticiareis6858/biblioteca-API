@@ -1,6 +1,8 @@
 package com.uninter.biblioteca.swagger;
 
 
+// classe que contém os exemplos de respostas da aplicação
+// tais exemplos são usados na documentação do swagger
 public class ExemplosResponses {
 
    public static final String criarEmprestimoResponse ="{\n" +

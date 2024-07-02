@@ -22,9 +22,11 @@ import static com.uninter.biblioteca.model.enumeration.Disponibilidade.INDISPONI
 import static com.uninter.biblioteca.model.enumeration.Status.DEVOLVIDO;
 import static com.uninter.biblioteca.model.enumeration.Status.PENDENTE;
 
+// classe de serviço para emprestimo
 @Service
 public class EmprestimoService {
 
+    // define o formato de data para dd-mm-yyyy
     private static final String DATE_FORMAT = "dd-MM-yyyy";
 
     @Autowired
@@ -36,12 +38,15 @@ public class EmprestimoService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    // define o formato de data_emprestimo para dd-mm-yyyy
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date dataEmprestimo;
 
+    // define o formato de data_devolucao para dd-mm-yyyy
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date dataDevolucao;
 
+    // método para criar um emprestimo
     public Emprestimo criarEmprestimo(EmprestimoDTO emprestimoDTO) {
         Emprestimo emprestimo = new Emprestimo();
 
@@ -104,38 +109,40 @@ public class EmprestimoService {
         return emprestimoRepository.save(emprestimo);
     }
 
-public Emprestimo atualizarEmprestimo(Long id, Emprestimo emprestimo) {
-    Emprestimo emprestimoExistente = emprestimoRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Emprestimo não encontrado com o ID: " + id));
+    // método para atualizar um emprestimo
+    public Emprestimo atualizarEmprestimo(Long id, Emprestimo emprestimo) {
+        Emprestimo emprestimoExistente = emprestimoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Emprestimo não encontrado com o ID: " + id));
 
-    if (emprestimo.getUsuario() != null) {
-        usuarioRepository.findById(emprestimo.getUsuario().getId())
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
-        emprestimoExistente.setUsuario(emprestimo.getUsuario());
+        if (emprestimo.getUsuario() != null) {
+            usuarioRepository.findById(emprestimo.getUsuario().getId())
+                    .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+            emprestimoExistente.setUsuario(emprestimo.getUsuario());
+        }
+
+        if (emprestimo.getLivro() != null) {
+            livroRepository.findById(emprestimo.getLivro().getId())
+                    .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
+            emprestimoExistente.setLivro(emprestimo.getLivro());
+        }
+
+        if (emprestimo.getData_emprestimo() != null) {
+            emprestimoExistente.setData_emprestimo(emprestimo.getData_emprestimo());
+        }
+
+        if (emprestimo.getData_devolucao() != null) {
+            emprestimoExistente.setData_devolucao(emprestimo.getData_devolucao());
+        }
+
+        if (emprestimo.getStatus() != null) {
+            emprestimoExistente.setStatus(emprestimo.getStatus());
+        }
+
+        return emprestimoRepository.save(emprestimoExistente);
+
     }
 
-    if (emprestimo.getLivro() != null) {
-        livroRepository.findById(emprestimo.getLivro().getId())
-                .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
-        emprestimoExistente.setLivro(emprestimo.getLivro());
-    }
-
-    if (emprestimo.getData_emprestimo() != null) {
-        emprestimoExistente.setData_emprestimo(emprestimo.getData_emprestimo());
-    }
-
-    if (emprestimo.getData_devolucao() != null) {
-        emprestimoExistente.setData_devolucao(emprestimo.getData_devolucao());
-    }
-
-    if (emprestimo.getStatus() != null) {
-        emprestimoExistente.setStatus(emprestimo.getStatus());
-    }
-
-    return emprestimoRepository.save(emprestimoExistente);
-
-}
-
+    // método para devolver um emprestimo
     public Emprestimo devolverEmprestimo(Long id) {
         Emprestimo emprestimoDevolvido = emprestimoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Emprestimo não encontrado"));
@@ -159,14 +166,17 @@ public Emprestimo atualizarEmprestimo(Long id, Emprestimo emprestimo) {
         return emprestimoRepository.save(emprestimoDevolvido);
     }
 
+    // método para excluir um emprestimo
     public void removerEmprestimo(Long id) {
         emprestimoRepository.deleteById(id);
     }
 
+    // método para obter um emprestimo pelo seu id
     public Emprestimo obterEmprestimoPorId(Long id) {
         return emprestimoRepository.findById(id).orElse(null);
     }
 
+    // método para obter todos os emprestimos
     public List<Emprestimo> obterTodosEmprestimos() {
         return emprestimoRepository.findAll();
     }

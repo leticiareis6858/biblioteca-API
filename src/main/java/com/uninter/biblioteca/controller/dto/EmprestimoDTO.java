@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.uninter.biblioteca.model.enumeration.Status;
 
-
+// classe que representa o DTO de empréstimo
 public class EmprestimoDTO {
 
     private Long usuario_id;
