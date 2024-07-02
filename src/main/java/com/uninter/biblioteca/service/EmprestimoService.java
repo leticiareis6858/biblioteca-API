@@ -26,9 +26,6 @@ import static com.uninter.biblioteca.model.enumeration.Status.PENDENTE;
 @Service
 public class EmprestimoService {
 
-    // define o formato de data para dd-mm-yyyy
-    private static final String DATE_FORMAT = "dd-MM-yyyy";
-
     @Autowired
     private EmprestimoRepository emprestimoRepository;
 
@@ -38,6 +35,9 @@ public class EmprestimoService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    // define o formato de data para dd-mm-yyyy
+    private static final String DATE_FORMAT = "dd-MM-yyyy";
+
     // define o formato de data_emprestimo para dd-mm-yyyy
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date dataEmprestimo;
@@ -45,6 +45,26 @@ public class EmprestimoService {
     // define o formato de data_devolucao para dd-mm-yyyy
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date dataDevolucao;
+
+    //método para formatar data
+    private Date formataData(String dateStr){
+        Date dataFormatada;
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT);
+            simpleDateFormat.setLenient(false);
+            dataFormatada = simpleDateFormat.parse(dateStr);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(dataFormatada);
+            calendar.set(Calendar.HOUR_OF_DAY, 0);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+            calendar.set(Calendar.MILLISECOND, 0);
+            dataFormatada = calendar.getTime();
+        } catch (ParseException e) {
+            throw new IllegalArgumentException("Formato de data inválido.", e);
+        }
+        return dataFormatada;
+    }
 
     // método para criar um emprestimo
     public Emprestimo criarEmprestimo(EmprestimoDTO emprestimoDTO) {
@@ -60,43 +80,16 @@ public class EmprestimoService {
             throw new RuntimeException("Livro indisponível para emprestimo");
         }
 
-        if (emprestimoDTO.getDataEmprestimo() == null || emprestimoDTO.getDataEmprestimo().isEmpty()) {
-            dataEmprestimo = new Date();
+        if (emprestimoDTO.getDataEmprestimo() != null && !emprestimoDTO.getDataEmprestimo().isEmpty()) {
+            dataEmprestimo = formataData(emprestimoDTO.getDataEmprestimo());
         } else {
-            try {
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT);
-                simpleDateFormat.setLenient(false);
-                dataEmprestimo = simpleDateFormat.parse(emprestimoDTO.getDataEmprestimo());
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(dataEmprestimo);
-                calendar.set(Calendar.HOUR_OF_DAY, 0);
-                calendar.set(Calendar.MINUTE, 0);
-                calendar.set(Calendar.SECOND, 0);
-                calendar.set(Calendar.MILLISECOND, 0);
-                dataEmprestimo = calendar.getTime();
-            } catch (ParseException e) {
-                throw new IllegalArgumentException("Formato de data inválido para data de empréstimo", e);
-            }
+            dataEmprestimo = new Date();
         }
-        System.out.println("Data Devolucao antes de criar: " + emprestimoDTO.getDataDevolucao());
+        emprestimo.setData_emprestimo(dataEmprestimo);
 
-        System.out.println("Data Devolucao depois de criar: " + emprestimoDTO.getDataDevolucao());
         if (emprestimoDTO.getDataDevolucao() != null && !emprestimoDTO.getDataDevolucao().isEmpty()) {
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
-                sdf.setLenient(false);
-                dataDevolucao = sdf.parse(emprestimoDTO.getDataDevolucao());
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(dataDevolucao);
-                calendar.set(Calendar.HOUR_OF_DAY, 0);
-                calendar.set(Calendar.MINUTE, 0);
-                calendar.set(Calendar.SECOND, 0);
-                calendar.set(Calendar.MILLISECOND, 0);
-                dataDevolucao = calendar.getTime();
-                System.out.println("Parsed Data Devolucao depois de formatar: " + dataDevolucao);
-            } catch (ParseException e) {
-                throw new IllegalArgumentException("Formato de data inválido para data de devolução", e);
-            }
+            dataDevolucao = formataData(emprestimoDTO.getDataDevolucao());
+            emprestimo.setData_devolucao(dataDevolucao);
         }
 
         emprestimo.setData_emprestimo(dataEmprestimo);
@@ -127,38 +120,12 @@ public class EmprestimoService {
         }
 
         if (emprestimoDTO.getDataEmprestimo() != null) {
-            try {
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT);
-                simpleDateFormat.setLenient(false);
-                dataEmprestimo = simpleDateFormat.parse(emprestimoDTO.getDataEmprestimo());
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(dataEmprestimo);
-                calendar.set(Calendar.HOUR_OF_DAY, 0);
-                calendar.set(Calendar.MINUTE, 0);
-                calendar.set(Calendar.SECOND, 0);
-                calendar.set(Calendar.MILLISECOND, 0);
-                dataEmprestimo = calendar.getTime();
-            } catch (ParseException e) {
-                throw new IllegalArgumentException("Formato de data inválido para data de empréstimo", e);
-            }
+            dataEmprestimo = formataData(emprestimoDTO.getDataEmprestimo());
             emprestimoExistente.setData_emprestimo(dataEmprestimo);
         }
 
         if (emprestimoDTO.getDataDevolucao() != null) {
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
-                sdf.setLenient(false);
-                dataDevolucao = sdf.parse(emprestimoDTO.getDataDevolucao());
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(dataDevolucao);
-                calendar.set(Calendar.HOUR_OF_DAY, 0);
-                calendar.set(Calendar.MINUTE, 0);
-                calendar.set(Calendar.SECOND, 0);
-                calendar.set(Calendar.MILLISECOND, 0);
-                dataDevolucao = calendar.getTime();
-            } catch (ParseException e) {
-                throw new IllegalArgumentException("Formato de data inválido para data de devolução", e);
-            }
+            dataDevolucao = formataData(emprestimoDTO.getDataDevolucao());
             emprestimoExistente.setData_devolucao(dataDevolucao);
         }
 
