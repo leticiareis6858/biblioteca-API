@@ -1,5 +1,6 @@
 package com.uninter.biblioteca.service;
 
+import com.uninter.biblioteca.controller.dto.LivroDTO;
 import com.uninter.biblioteca.model.entity.Livro;
 
 import static com.uninter.biblioteca.model.enumeration.Disponibilidade.DISPONIVEL;
@@ -20,36 +21,41 @@ public class LivroService {
     }
 
     // método para criar um livro
-    public Livro adicionarLivro(Livro livro) {
-        if(livro.getDisponibilidade()==null){
+    public Livro adicionarLivro(LivroDTO livroDTO) {
+        Livro livro = new Livro();
+        livro.setTitulo(livroDTO.getTitulo());
+        livro.setAutor(livroDTO.getAutor());
+        if(livroDTO.getDisponibilidade() == null){
             livro.setDisponibilidade(DISPONIVEL);
+        } else {
+            livro.setDisponibilidade(livroDTO.getDisponibilidade());
         }
         return livroRepository.save(livro);
     }
 
     // método para atualizar um livro
-    public Livro atualizarLivro(Long id, Livro livro) {
+    public Livro atualizarLivro(Long id, LivroDTO livroDTO) {
         Livro livroExistente = livroRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Livro não encontrado com o ID: " + id));
 
-        if (livro.getTitulo() != null) {
-            livroExistente.setTitulo(livro.getTitulo());
+        if (livroExistente.getTitulo() != null) {
+            livroExistente.setTitulo(livroDTO.getTitulo());
         }
 
-        if (livro.getAutor() != null) {
-            livroExistente.setAutor(livro.getAutor());
+        if (livroExistente.getAutor() != null) {
+            livroExistente.setAutor(livroDTO.getAutor());
         }
 
-        if (livro.getIsbn() != null) {
-            livroExistente.setIsbn(livro.getIsbn());
+        if (livroExistente.getIsbn() != null) {
+            livroExistente.setIsbn(livroDTO.getIsbn());
         }
 
-        if (livro.getGenero() != null) {
-            livroExistente.setGenero(livro.getGenero());
+        if (livroExistente.getGenero() != null) {
+            livroExistente.setGenero(livroDTO.getGenero());
         }
 
-        if (livro.getDisponibilidade() != null) {
-            livroExistente.setDisponibilidade(livro.getDisponibilidade());
+        if (livroExistente.getDisponibilidade() != null) {
+            livroExistente.setDisponibilidade(livroDTO.getDisponibilidade());
         }
 
         return livroRepository.save(livroExistente);
