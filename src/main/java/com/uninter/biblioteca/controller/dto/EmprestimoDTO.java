@@ -21,6 +21,7 @@ public class EmprestimoDTO {
 
     private Status status;
 
+    // getters e setters
     public Long getUsuario_id() {
         return usuario_id;
     }
