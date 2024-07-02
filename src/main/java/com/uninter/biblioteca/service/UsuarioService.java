@@ -1,5 +1,6 @@
 package com.uninter.biblioteca.service;
 
+import com.uninter.biblioteca.controller.dto.UsuarioDTO;
 import com.uninter.biblioteca.model.entity.Usuario;
 import com.uninter.biblioteca.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,34 +20,38 @@ public class UsuarioService {
     private PasswordEncoder passwordEncoder;
 
     // método para criar um usuario
-    public Usuario criarUsuario(Usuario usuario) {
-        usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
+    public Usuario criarUsuario(UsuarioDTO usuarioDTO) {
+        Usuario usuario = new Usuario();
+        usuario.setNome(usuarioDTO.getNome());
+        usuario.setEmail(usuarioDTO.getEmail());
+        usuario.setSenha(passwordEncoder.encode(usuarioDTO.getSenha()));
+        usuario.setCargo(usuarioDTO.getCargo());
         return usuarioRepository.save(usuario);
     }
 
     // método para adicionar um usuario
-    public Usuario atualizarUsuario(Long id, Usuario usuario) {
+    public Usuario atualizarUsuario(Long id, UsuarioDTO usuarioDTO) {
         Usuario usuarioExistente = usuarioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado com o ID: " + id));
 
-        if (usuario.getCargo() != null) {
+        if (usuarioExistente.getCargo() != null) {
             throw new IllegalArgumentException("Não é permitido mudar o cargo do usuário.");
         }
 
-        if (usuario.getNome() != null) {
-            usuarioExistente.setNome(usuario.getNome());
+        if (usuarioExistente.getNome() != null) {
+            usuarioExistente.setNome(usuarioDTO.getNome());
         }
 
-        if (usuario.getEmail() != null) {
-            usuarioExistente.setEmail(usuario.getEmail());
+        if (usuarioExistente.getEmail() != null) {
+            usuarioExistente.setEmail(usuarioDTO.getEmail());
         }
 
-        if (usuario.getSenha() != null) {
-            usuarioExistente.setSenha(passwordEncoder.encode(usuario.getSenha()));
+        if (usuarioExistente.getSenha() != null) {
+            usuarioExistente.setSenha(passwordEncoder.encode(usuarioDTO.getSenha()));
         }
 
-        if (usuario.getCargo() != null) {
-            usuarioExistente.setCargo(usuario.getCargo());
+        if (usuarioExistente.getCargo() != null) {
+            usuarioExistente.setCargo(usuarioDTO.getCargo());
         }
 
         return usuarioRepository.save(usuarioExistente);

@@ -1,5 +1,6 @@
 package com.uninter.biblioteca.controller;
 
+import com.uninter.biblioteca.controller.dto.UsuarioDTO;
 import com.uninter.biblioteca.model.entity.Usuario;
 import com.uninter.biblioteca.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,8 +33,8 @@ public class UsuarioController {
     @ApiResponse(responseCode = "200", description = "Retorna o usuário criado",
             content = @Content(mediaType = "application/json", examples = @ExampleObject(value = criarUsuarioResponse)))
     // rota em si
-    public ResponseEntity<Usuario> criarUsuario(@RequestBody Usuario usuario) {
-        Usuario novoUsuario = usuarioService.criarUsuario(usuario);
+    public ResponseEntity<Usuario> criarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+        Usuario novoUsuario = usuarioService.criarUsuario(usuarioDTO);
         return ResponseEntity.ok(novoUsuario);
     }
 
@@ -46,8 +47,8 @@ public class UsuarioController {
     @ApiResponse(responseCode = "200", description = "Retorna o usuário atualizado",
             content = @Content(mediaType = "application/json", examples = @ExampleObject(value = atualizarUsuarioResponse)))
     // rota em si
-    public ResponseEntity<Usuario> atualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuarioAtualizado) {
-        Usuario usuario = usuarioService.atualizarUsuario(id, usuarioAtualizado);
+    public ResponseEntity<Usuario> atualizarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
+        Usuario usuario = usuarioService.atualizarUsuario(id, usuarioDTO);
         return ResponseEntity.ok(usuario);
     }
 
