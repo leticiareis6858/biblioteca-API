@@ -110,36 +110,63 @@ public class EmprestimoService {
     }
 
     // método para atualizar um emprestimo
-    public Emprestimo atualizarEmprestimo(Long id, Emprestimo emprestimo) {
+    public Emprestimo atualizarEmprestimo(Long id, EmprestimoDTO emprestimoDTO) {
         Emprestimo emprestimoExistente = emprestimoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Emprestimo não encontrado com o ID: " + id));
 
-        if (emprestimo.getUsuario() != null) {
-            usuarioRepository.findById(emprestimo.getUsuario().getId())
+        if (emprestimoDTO.getUsuario_id() != null) {
+            Usuario usuario = usuarioRepository.findById(emprestimoDTO.getUsuario_id())
                     .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
-            emprestimoExistente.setUsuario(emprestimo.getUsuario());
+            emprestimoExistente.setUsuario(usuario);
         }
 
-        if (emprestimo.getLivro() != null) {
-            livroRepository.findById(emprestimo.getLivro().getId())
+        if (emprestimoDTO.getLivro_id() != null) {
+            Livro livro = livroRepository.findById(emprestimoDTO.getLivro_id())
                     .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
-            emprestimoExistente.setLivro(emprestimo.getLivro());
+            emprestimoExistente.setLivro(livro);
         }
 
-        if (emprestimo.getData_emprestimo() != null) {
-            emprestimoExistente.setData_emprestimo(emprestimo.getData_emprestimo());
+        if (emprestimoDTO.getDataEmprestimo() != null) {
+            try {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT);
+                simpleDateFormat.setLenient(false);
+                dataEmprestimo = simpleDateFormat.parse(emprestimoDTO.getDataEmprestimo());
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(dataEmprestimo);
+                calendar.set(Calendar.HOUR_OF_DAY, 0);
+                calendar.set(Calendar.MINUTE, 0);
+                calendar.set(Calendar.SECOND, 0);
+                calendar.set(Calendar.MILLISECOND, 0);
+                dataEmprestimo = calendar.getTime();
+            } catch (ParseException e) {
+                throw new IllegalArgumentException("Formato de data inválido para data de empréstimo", e);
+            }
+            emprestimoExistente.setData_emprestimo(dataEmprestimo);
         }
 
-        if (emprestimo.getData_devolucao() != null) {
-            emprestimoExistente.setData_devolucao(emprestimo.getData_devolucao());
+        if (emprestimoDTO.getDataDevolucao() != null) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+                sdf.setLenient(false);
+                dataDevolucao = sdf.parse(emprestimoDTO.getDataDevolucao());
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(dataDevolucao);
+                calendar.set(Calendar.HOUR_OF_DAY, 0);
+                calendar.set(Calendar.MINUTE, 0);
+                calendar.set(Calendar.SECOND, 0);
+                calendar.set(Calendar.MILLISECOND, 0);
+                dataDevolucao = calendar.getTime();
+            } catch (ParseException e) {
+                throw new IllegalArgumentException("Formato de data inválido para data de devolução", e);
+            }
+            emprestimoExistente.setData_devolucao(dataDevolucao);
         }
 
-        if (emprestimo.getStatus() != null) {
-            emprestimoExistente.setStatus(emprestimo.getStatus());
+        if (emprestimoDTO.getStatus() != null) {
+            emprestimoExistente.setStatus(emprestimoDTO.getStatus());
         }
 
         return emprestimoRepository.save(emprestimoExistente);
-
     }
 
     // método para devolver um emprestimo
