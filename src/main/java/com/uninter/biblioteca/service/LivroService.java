@@ -16,15 +16,13 @@ public class LivroService {
 
     private LivroRepository livroRepository;
 
-    public LivroService(LivroRepository livroRepository) {
-        this.livroRepository = livroRepository;
-    }
-
     // método para criar um livro
     public Livro adicionarLivro(LivroDTO livroDTO) {
         Livro livro = new Livro();
         livro.setTitulo(livroDTO.getTitulo());
         livro.setAutor(livroDTO.getAutor());
+        livro.setIsbn(livroDTO.getIsbn());
+        livro.setGenero(livroDTO.getGenero());
         if(livroDTO.getDisponibilidade() == null){
             livro.setDisponibilidade(DISPONIVEL);
         } else {
