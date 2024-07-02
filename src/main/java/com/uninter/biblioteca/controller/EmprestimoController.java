@@ -47,9 +47,8 @@ public class EmprestimoController {
     @ApiResponse(responseCode = "200", description = "Retorna o emprestimo atualizado",
             content = @Content(mediaType = "application/json", examples = @ExampleObject(value = atualizarEmprestimoResponse)))
     // rota em si
-    public ResponseEntity<Emprestimo> atualizarEmprestimo(@PathVariable Long id, @RequestBody Emprestimo emprestimo) {
-        emprestimo.setId(id);
-        Emprestimo emprestimoAtualizado = emprestimoService.atualizarEmprestimo(id, emprestimo);
+    public ResponseEntity<Emprestimo> atualizarEmprestimo(@PathVariable Long id, @RequestBody EmprestimoDTO emprestimoDTO) {
+        Emprestimo emprestimoAtualizado = emprestimoService.atualizarEmprestimo(id, emprestimoDTO);
         return ResponseEntity.ok(emprestimoAtualizado);
     }
 
