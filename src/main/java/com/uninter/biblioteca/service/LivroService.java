@@ -38,23 +38,23 @@ public class LivroService {
         Livro livroExistente = livroRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Livro não encontrado com o ID: " + id));
 
-        if (livroExistente.getTitulo() != null) {
+        if (livroDTO.getTitulo() != null) {
             livroExistente.setTitulo(livroDTO.getTitulo());
         }
 
-        if (livroExistente.getAutor() != null) {
+        if (livroDTO.getAutor() != null) {
             livroExistente.setAutor(livroDTO.getAutor());
         }
 
-        if (livroExistente.getIsbn() != null) {
+        if (livroDTO.getIsbn() != null) {
             livroExistente.setIsbn(livroDTO.getIsbn());
         }
 
-        if (livroExistente.getGenero() != null) {
+        if (livroDTO.getGenero() != null) {
             livroExistente.setGenero(livroDTO.getGenero());
         }
 
-        if (livroExistente.getDisponibilidade() != null) {
+        if (livroDTO.getDisponibilidade() != null) {
             livroExistente.setDisponibilidade(livroDTO.getDisponibilidade());
         }
 
