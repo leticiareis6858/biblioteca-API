@@ -29,19 +29,19 @@ public class UsuarioService {
         Usuario usuarioExistente = usuarioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado com o ID: " + id));
 
-        if (usuarioExistente.getCargo() != null) {
+        if (usuarioDTO.getCargo() != null) {
             throw new IllegalArgumentException("Não é permitido mudar o cargo do usuário.");
         }
 
-        if (usuarioExistente.getNome() != null) {
+        if (usuarioDTO.getNome() != null) {
             usuarioExistente.setNome(usuarioDTO.getNome());
         }
 
-        if (usuarioExistente.getEmail() != null) {
+        if (usuarioDTO.getEmail() != null) {
             usuarioExistente.setEmail(usuarioDTO.getEmail());
         }
 
-        if (usuarioExistente.getCargo() != null) {
+        if (usuarioDTO.getCargo() != null) {
             usuarioExistente.setCargo(usuarioDTO.getCargo());
         }
 
