@@ -17,7 +17,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\":\"\",\r\n    \"email\":\"\",\r\n    \"senha\":\"\",\r\n    \"cargo\":\"\"\r\n}\r\n// Cargo pode ser: ADMIN, BIBLIOTECARIO, LEITOR",
+							"raw": "{\r\n    \"nome\":\"\",\r\n    \"email\":\"\",\r\n    \"cargo\":\"\"\r\n}\r\n// Cargo pode ser: ADMIN, BIBLIOTECARIO, LEITOR",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -45,7 +45,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\":\"\",\r\n    \"email\":\"\",\r\n    \"senha\":\"\",\r\n    \"cargo\":\"\"\r\n}\r\n\r\n// Pode atualizar quantos e quaisquer campos",
+							"raw": "{\r\n    \"nome\":\"\",\r\n    \"email\":\"\",\r\n    \"cargo\":\"\"\r\n}\r\n\r\n// Pode atualizar quantos e quaisquer campos",
 							"options": {
 								"raw": {
 									"language": "json"
