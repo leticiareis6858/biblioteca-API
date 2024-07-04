@@ -4,7 +4,6 @@ import com.uninter.biblioteca.controller.dto.UsuarioDTO;
 import com.uninter.biblioteca.model.entity.Usuario;
 import com.uninter.biblioteca.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,15 +15,11 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     // método para criar um usuario
     public Usuario criarUsuario(UsuarioDTO usuarioDTO) {
         Usuario usuario = new Usuario();
         usuario.setNome(usuarioDTO.getNome());
         usuario.setEmail(usuarioDTO.getEmail());
-        usuario.setSenha(passwordEncoder.encode(usuarioDTO.getSenha()));
         usuario.setCargo(usuarioDTO.getCargo());
         return usuarioRepository.save(usuario);
     }
@@ -44,10 +39,6 @@ public class UsuarioService {
 
         if (usuarioExistente.getEmail() != null) {
             usuarioExistente.setEmail(usuarioDTO.getEmail());
-        }
-
-        if (usuarioExistente.getSenha() != null) {
-            usuarioExistente.setSenha(passwordEncoder.encode(usuarioDTO.getSenha()));
         }
 
         if (usuarioExistente.getCargo() != null) {

@@ -20,9 +20,6 @@ public class Usuario {
     @Column(name="email", nullable=false, unique=true, length=100)
     private String email;
 
-    @Column(name="senha", nullable=false, length=200)
-    private String senha;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "cargo",nullable = false)
     private Cargo cargo;
@@ -50,14 +47,6 @@ public class Usuario {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
     public Cargo getCargo() {
