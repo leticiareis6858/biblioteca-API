@@ -55,11 +55,16 @@ public class UsuarioService {
 
     // método para obter um usuario pelo seu id
     public Usuario obterUsuarioPorId(Long id) {
-        return usuarioRepository.findById(id).orElse(null);
+        return usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com o ID: " + id));
     }
 
     // método para obter todos os usuarios
     public List<Usuario> obterTodosUsuarios() {
-        return usuarioRepository.findAll();
+        List<Usuario> usuarios=usuarioRepository.findAll();
+        if(usuarios.isEmpty()){
+            throw new RuntimeException("Nenhum usuário encontrado!");
+        }
+        return usuarios;
     }
 }

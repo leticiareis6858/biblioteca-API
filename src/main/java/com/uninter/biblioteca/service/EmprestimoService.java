@@ -167,12 +167,17 @@ public class EmprestimoService {
 
     // método para obter um emprestimo pelo seu id
     public Emprestimo obterEmprestimoPorId(Long id) {
-        return emprestimoRepository.findById(id).orElse(null);
+        return emprestimoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Empréstimo não encontrado com o ID: " + id));
     }
 
     // método para obter todos os emprestimos
     public List<Emprestimo> obterTodosEmprestimos() {
-        return emprestimoRepository.findAll();
+        List<Emprestimo> emprestimos = emprestimoRepository.findAll();
+        if (emprestimos.isEmpty()) {
+            throw new RuntimeException("Nenhum empréstimo encontrado!");
+        }
+        return emprestimos;
     }
 
 }

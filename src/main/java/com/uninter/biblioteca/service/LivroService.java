@@ -68,11 +68,16 @@ public class LivroService {
 
     // método para obter um livro pelo seu id
     public Livro obterLivroPorId(Long id) {
-        return livroRepository.findById(id).orElse(null);
+        return livroRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Livro não encontrado com o ID: " + id));
     }
 
     // método para obter todos os livros
     public List<Livro> obterTodosLivros() {
-        return livroRepository.findAll();
+        List<Livro> livros=livroRepository.findAll();
+        if(livros.isEmpty()){
+            throw new RuntimeException("Nenhum livro encontrado!");
+        }
+        return livros;
     }
 }
