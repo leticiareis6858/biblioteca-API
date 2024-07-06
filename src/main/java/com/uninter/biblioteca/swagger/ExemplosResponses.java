@@ -11,9 +11,8 @@ public class ExemplosResponses {
             "    \"id\": 10,\n" +
             "    \"usuario\": {\n" +
             "        \"id\": 1,\n" +
-            "        \"nome\": \"ana\",\n" +
+            "        \"nome\": \"ana leticia\",\n" +
             "        \"email\": \"ana@4106985.com\",\n" +
-            "        \"senha\": \"$2a$10$LNmwV8EEPTPFW1irTO0lP.bd.2O8gHlz06kvqREWazlPOcffA1jsu\",\n" +
             "        \"cargo\": \"LEITOR\"\n" +
             "    },\n" +
             "    \"livro\": {\n" +
@@ -35,7 +34,6 @@ public class ExemplosResponses {
            "        \"id\": 4,\n" +
            "        \"nome\": \"usuario\",\n" +
            "        \"email\": \"usuario@4106985.com\",\n" +
-           "        \"senha\": \"$2a$10$LNmwV8EEPTPFW1ir00Af.bd.2O8gHlz06kvqREWazlPOcffA1jsu\",\n" +
            "        \"cargo\": \"LEITOR\"\n" +
            "    },\n" +
            "    \"livro\": {\n" +
@@ -55,9 +53,8 @@ public class ExemplosResponses {
            "    \"id\": 2,\n" +
            "    \"usuario\": {\n" +
            "        \"id\": 1,\n" +
-           "        \"nome\": \"ana\",\n" +
-           "        \"email\": \"ana\",\n" +
-           "        \"senha\": \"$2a$10$LNmwV8EEPTPFW1irTO0lP.bd.2O8gHlz06kvqREWazlPOcffA1jsu\",\n" +
+           "        \"nome\": \"ana leticia\",\n" +
+           "        \"email\": \"ana@4106985.com\",\n" +
            "        \"cargo\": \"BIBLIOTECARIO\"\n" +
            "    },\n" +
            "    \"livro\": {\n" +
@@ -77,9 +74,8 @@ public class ExemplosResponses {
            "    \"id\": 3,\n" +
            "    \"usuario\": {\n" +
            "        \"id\": 1,\n" +
-           "        \"nome\": \"ana\",\n" +
-           "        \"email\": \"ana\",\n" +
-           "        \"senha\": \"$2a$10$LNmwV8EEPTPFW1irTO0lP.bd.2O8gHlz06kvqREWazlPOcffA1jsu\",\n" +
+           "        \"nome\": \"ana leticia\",\n" +
+           "        \"email\": \"ana@4106985.com\",\n" +
            "        \"cargo\": \"BIBLIOTECARIO\"\n" +
            "    },\n" +
            "    \"livro\": {\n" +
@@ -100,9 +96,8 @@ public class ExemplosResponses {
            "        \"id\": 9,\n" +
            "        \"usuario\": {\n" +
            "            \"id\": 1,\n" +
-           "            \"nome\": \"ana\",\n" +
-           "            \"email\": \"ana\",\n" +
-           "            \"senha\": \"$2a$10$LNmwV8EEPTPFW1irTO0lP.bd.2O8gHlz06kvqREWazlPOcffA1jsu\",\n" +
+           "            \"nome\": \"ana leticia\",\n" +
+           "            \"email\": \"ana@4106985.com\",\n" +
            "            \"cargo\": \"BIBLIOTECARIO\"\n" +
            "        },\n" +
            "        \"livro\": {\n" +
@@ -123,7 +118,6 @@ public class ExemplosResponses {
            "            \"id\": 1,\n" +
            "            \"nome\": \"ana\",\n" +
            "            \"email\": \"ana\",\n" +
-           "            \"senha\": \"$2a$10$LNmwV8EEPTPFW1irTO0lP.bd.2O8gHlz06kvqREWazlPOcffA1jsu\",\n" +
            "            \"cargo\": \"BIBLIOTECARIO\"\n" +
            "        },\n" +
            "        \"livro\": {\n" +
@@ -206,7 +200,6 @@ public class ExemplosResponses {
            "    \"id\": 4,\n" +
            "    \"nome\": \"usuario leitor\",\n" +
            "    \"email\": \"leitor@4106985.com\",\n" +
-           "    \"senha\": \"$2a$10$CjUPHAJ6Da9naofO9L3i0uASuTh8v7pgrTyJ50vANV7pGnXgLTUJW\",\n" +
            "    \"cargo\": \"LEITOR\"\n" +
            "}";
 
@@ -214,7 +207,6 @@ public class ExemplosResponses {
            "    \"id\": 4,\n" +
            "    \"nome\": \"leitor\",\n" +
            "    \"email\": \"leitor@4106985.com\",\n" +
-           "    \"senha\": \"$2a$10$CjUPHAJ6Da9naofO9L3i0uASuTh8v7pgrTyJ50vANV7pGnXgLTUJW\",\n" +
            "    \"cargo\": \"LEITOR\"\n" +
            "}";
 
@@ -222,7 +214,6 @@ public class ExemplosResponses {
            "    \"id\": 4,\n" +
            "    \"nome\": \"leitor\",\n" +
            "    \"email\": \"leitor@4106985.com\",\n" +
-           "    \"senha\": \"$2a$10$CjUPHAJ6Da9naofO9L3i0uASuTh8v7pgrTyJ50vANV7pGnXgLTUJW\",\n" +
            "    \"cargo\": \"LEITOR\"\n" +
            "}";
 
@@ -231,21 +222,18 @@ public class ExemplosResponses {
            "        \"id\": 1,\n" +
            "        \"nome\": \"bibliotecario\",\n" +
            "        \"email\": \"bibliotecario@4106985.com\",\n" +
-           "        \"senha\": \"$2a$10$LNmwV8EEPTPFW1irTO0lP.bd.2O8gHlz06kvqREWazlPOcffA1jsu\",\n" +
            "        \"cargo\": \"BIBLIOTECARIO\"\n" +
            "    },\n" +
            "    {\n" +
            "        \"id\": 3,\n" +
            "        \"nome\": \"admin\",\n" +
            "        \"email\": \"admin@4106985.com\",\n" +
-           "        \"senha\": \"$2a$10$Th4OMj13qR5qa6OoKyIfduGhjtxUBNHNJh1vSpsq4Aonsl8ay14aS\",\n" +
            "        \"cargo\": \"ADMIN\"\n" +
            "    },\n" +
            "    {\n" +
            "        \"id\": 4,\n" +
            "        \"nome\": \"leitor\",\n" +
            "        \"email\": \"leitor@4106985.com\",\n" +
-           "        \"senha\": \"$2a$10$CjUPHAJ6Da9naofO9L3i0uASuTh8v7pgrTyJ50vANV7pGnXgLTUJW\",\n" +
            "        \"cargo\": \"LEITOR\"\n" +
            "    }\n" +
            "]";

@@ -32,7 +32,6 @@ public class ExemplosRequestBody {
     public static final String criarUsuarioBody="{\n" +
             "    \"nome\": \"usuario leitor\",\n" +
             "    \"email\": \"leitor@4106985.com\",\n" +
-            "    \"senha\": \"leitor\",\n" +
             "    \"cargo\": \"LEITOR\"\n" +
             "}";
 
