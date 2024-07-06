@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.uninter.biblioteca.model.enumeration.Status;
 
+// Ana Leticia Vieira Reis de Carvalho
+// RU: 4106985
+
 // classe que representa o DTO de empréstimo
 public class EmprestimoDTO {
 

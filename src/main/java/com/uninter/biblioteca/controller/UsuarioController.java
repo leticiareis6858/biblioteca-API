@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// Ana Leticia Vieira Reis de Carvalho
+// RU: 4106985
+
 import static com.uninter.biblioteca.swagger.ExemplosRequestBody.*;
 import static com.uninter.biblioteca.swagger.ExemplosResponses.*;
 

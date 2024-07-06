@@ -11,6 +11,9 @@ import com.uninter.biblioteca.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+// Ana Leticia Vieira Reis de Carvalho
+// RU: 4106985
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;

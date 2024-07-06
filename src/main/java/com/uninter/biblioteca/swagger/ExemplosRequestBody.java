@@ -1,5 +1,8 @@
 package com.uninter.biblioteca.swagger;
 
+// Ana Leticia Vieira Reis de Carvalho
+// RU: 4106985
+
 // classe que contém os exemplos de request body da aplicação
 // tais exemplos são usados na documentação do swagger
 public class ExemplosRequestBody {

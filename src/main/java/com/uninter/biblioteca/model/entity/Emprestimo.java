@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 
+// Ana Leticia Vieira Reis de Carvalho
+// RU: 4106985
+
 // tabela emprestimo
 @Entity
 @Table(name = "EMPRESTIMO")

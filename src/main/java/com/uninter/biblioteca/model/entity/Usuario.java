@@ -3,6 +3,9 @@ package com.uninter.biblioteca.model.entity;
 import com.uninter.biblioteca.model.enumeration.Cargo;
 import jakarta.persistence.*;
 
+// Ana Leticia Vieira Reis de Carvalho
+// RU: 4106985
+
 // tabela usuario
 @Entity
 @Table(name="USUARIO")

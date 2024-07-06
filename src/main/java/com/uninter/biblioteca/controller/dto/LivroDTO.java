@@ -2,6 +2,9 @@ package com.uninter.biblioteca.controller.dto;
 
 import com.uninter.biblioteca.model.enumeration.Disponibilidade;
 
+// Ana Leticia Vieira Reis de Carvalho
+// RU: 4106985
+
 // classe que representa o DTO de livro
 public class LivroDTO {
 
