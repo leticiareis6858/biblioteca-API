@@ -1,4 +1,4 @@
-package com.uninter.biblioteca.model.enumeration;
+package com.uninter.biblioteca.model.entity.enumeration;
 
 // Ana Leticia Vieira Reis de Carvalho
 // RU: 4106985

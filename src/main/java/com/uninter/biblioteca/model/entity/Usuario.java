@@ -1,6 +1,6 @@
 package com.uninter.biblioteca.model.entity;
 
-import com.uninter.biblioteca.model.enumeration.Cargo;
+import com.uninter.biblioteca.model.entity.enumeration.Cargo;
 import jakarta.persistence.*;
 
 // Ana Leticia Vieira Reis de Carvalho

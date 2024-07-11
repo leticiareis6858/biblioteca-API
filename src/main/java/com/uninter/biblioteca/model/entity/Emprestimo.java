@@ -1,6 +1,6 @@
 package com.uninter.biblioteca.model.entity;
 
-import com.uninter.biblioteca.model.enumeration.Status;
+import com.uninter.biblioteca.model.entity.enumeration.Status;
 import jakarta.persistence.*;
 
 import java.util.Date;

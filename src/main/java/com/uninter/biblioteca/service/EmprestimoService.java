@@ -1,14 +1,12 @@
 package com.uninter.biblioteca.service;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.uninter.biblioteca.controller.dto.EmprestimoDTO;
+import com.uninter.biblioteca.model.dao.EmprestimoDaoImpl;
+import com.uninter.biblioteca.model.dao.LivroDaoImpl;
+import com.uninter.biblioteca.model.dao.UsuarioDaoImpl;
 import com.uninter.biblioteca.model.entity.Emprestimo;
 import com.uninter.biblioteca.model.entity.Livro;
 import com.uninter.biblioteca.model.entity.Usuario;
-import com.uninter.biblioteca.repository.EmprestimoRepository;
-import com.uninter.biblioteca.repository.LivroRepository;
-import com.uninter.biblioteca.repository.UsuarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 // Ana Leticia Vieira Reis de Carvalho
@@ -20,23 +18,20 @@ import java.util.List;
 import java.util.Date;
 import java.text.ParseException;
 
-import static com.uninter.biblioteca.model.enumeration.Disponibilidade.DISPONIVEL;
-import static com.uninter.biblioteca.model.enumeration.Disponibilidade.INDISPONIVEL;
-import static com.uninter.biblioteca.model.enumeration.Status.DEVOLVIDO;
-import static com.uninter.biblioteca.model.enumeration.Status.PENDENTE;
+import static com.uninter.biblioteca.model.entity.enumeration.Disponibilidade.DISPONIVEL;
+import static com.uninter.biblioteca.model.entity.enumeration.Disponibilidade.INDISPONIVEL;
+import static com.uninter.biblioteca.model.entity.enumeration.Status.DEVOLVIDO;
+import static com.uninter.biblioteca.model.entity.enumeration.Status.PENDENTE;
 
 // classe de serviço para emprestimo
 @Service
 public class EmprestimoService {
 
-    @Autowired
-    private EmprestimoRepository emprestimoRepository;
+    private final EmprestimoDaoImpl emprestimoDao;
 
-    @Autowired
-    private LivroRepository livroRepository;
+    private final LivroDaoImpl livroDao;
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioDaoImpl usuarioDao;
 
     // define o formato de data para dd-mm-yyyy
     private static final String DATE_FORMAT = "dd-MM-yyyy";
@@ -48,6 +43,12 @@ public class EmprestimoService {
     // define o formato de data_devolucao para dd-mm-yyyy
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date dataDevolucao;
+
+    public EmprestimoService(EmprestimoDaoImpl emprestimoDao, LivroDaoImpl livroDao, UsuarioDaoImpl usuarioDao) {
+        this.emprestimoDao = emprestimoDao;
+        this.livroDao = livroDao;
+        this.usuarioDao = usuarioDao;
+    }
 
     //método para formatar data
     private Date formataData(String dateStr){
@@ -70,28 +71,33 @@ public class EmprestimoService {
     }
 
     // método para criar um emprestimo
-    public Emprestimo criarEmprestimo(EmprestimoDTO emprestimoDTO) {
-        Emprestimo emprestimo = new Emprestimo();
+    public Emprestimo criarEmprestimo(Emprestimo emprestimo) {
+        emprestimo = new Emprestimo();
 
-        Usuario usuario = usuarioRepository.findById(emprestimoDTO.getUsuario_id())
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        Usuario usuario = usuarioDao.findById(emprestimo.getUsuario().getId());
+        if (usuario == null) {
+            throw new RuntimeException("Usuário não encontrado");
+        }
 
-        Livro livro = livroRepository.findById(emprestimoDTO.getLivro_id())
-                .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
+        Livro livro = livroDao.findById(emprestimo.getLivro().getId());
+        if(livro==null) {
+            throw new RuntimeException("Livro não encontrado");
+        }
 
         if (livro.getDisponibilidade() == INDISPONIVEL) {
             throw new RuntimeException("Livro indisponível para emprestimo");
         }
 
-        if (emprestimoDTO.getDataEmprestimo() != null && !emprestimoDTO.getDataEmprestimo().isEmpty()) {
-            dataEmprestimo = formataData(emprestimoDTO.getDataEmprestimo());
+        if (emprestimo.getData_emprestimo() != null) {
+            dataEmprestimo = emprestimo.getData_emprestimo();
         } else {
             dataEmprestimo = new Date();
         }
+
         emprestimo.setData_emprestimo(dataEmprestimo);
 
-        if (emprestimoDTO.getDataDevolucao() != null && !emprestimoDTO.getDataDevolucao().isEmpty()) {
-            dataDevolucao = formataData(emprestimoDTO.getDataDevolucao());
+        if (emprestimo.getData_devolucao() != null) {
+           dataDevolucao = emprestimo.getData_devolucao();
             emprestimo.setData_devolucao(dataDevolucao);
         }
 
@@ -102,47 +108,57 @@ public class EmprestimoService {
         emprestimo.setStatus(PENDENTE);
         livro.setDisponibilidade(INDISPONIVEL);
 
-        return emprestimoRepository.save(emprestimo);
+        emprestimoDao.save(emprestimo);
+        return emprestimo;
     }
 
     // método para atualizar um emprestimo
-    public Emprestimo atualizarEmprestimo(Long id, EmprestimoDTO emprestimoDTO) {
-        Emprestimo emprestimoExistente = emprestimoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Emprestimo não encontrado com o ID: " + id));
+    public Emprestimo atualizarEmprestimo(Long id, Emprestimo emprestimo) {
+        Emprestimo emprestimoExistente = emprestimoDao.findById(id);
+        if (emprestimoExistente == null) {
+           throw new RuntimeException("Emprestimo não encontrado com o ID: " + id);
+        }
 
-        if (emprestimoDTO.getUsuario_id() != null) {
-            Usuario usuario = usuarioRepository.findById(emprestimoDTO.getUsuario_id())
-                    .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        if (emprestimo.getUsuario() != null) {
+            Usuario usuario = usuarioDao.findById(emprestimo.getUsuario().getId());
+            if (usuario == null) {
+                throw new RuntimeException("Usuário não encontrado");
+            }
             emprestimoExistente.setUsuario(usuario);
         }
 
-        if (emprestimoDTO.getLivro_id() != null) {
-            Livro livro = livroRepository.findById(emprestimoDTO.getLivro_id())
-                    .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
+        if (emprestimo.getLivro() != null) {
+            Livro livro = livroDao.findById(emprestimo.getLivro().getId());
+            if (livro == null) {
+               throw new RuntimeException("Livro não encontrado");
+            }
             emprestimoExistente.setLivro(livro);
         }
 
-        if (emprestimoDTO.getDataEmprestimo() != null) {
-            dataEmprestimo = formataData(emprestimoDTO.getDataEmprestimo());
+        if (emprestimo.getData_emprestimo() != null) {
+            dataEmprestimo = emprestimo.getData_emprestimo();
             emprestimoExistente.setData_emprestimo(dataEmprestimo);
         }
 
-        if (emprestimoDTO.getDataDevolucao() != null) {
-            dataDevolucao = formataData(emprestimoDTO.getDataDevolucao());
+        if (emprestimo.getData_devolucao() != null) {
+            dataDevolucao = emprestimo.getData_devolucao();
             emprestimoExistente.setData_devolucao(dataDevolucao);
         }
 
-        if (emprestimoDTO.getStatus() != null) {
-            emprestimoExistente.setStatus(emprestimoDTO.getStatus());
+        if (emprestimo.getStatus() != null) {
+            emprestimoExistente.setStatus(emprestimo.getStatus());
         }
 
-        return emprestimoRepository.save(emprestimoExistente);
+        emprestimoDao.update(emprestimoExistente);
+        return emprestimoExistente;
     }
 
     // método para devolver um emprestimo
     public Emprestimo devolverEmprestimo(Long id) {
-        Emprestimo emprestimoDevolvido = emprestimoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Emprestimo não encontrado"));
+        Emprestimo emprestimoDevolvido = emprestimoDao.findById(id);
+        if (emprestimoDevolvido == null) {
+           throw new RuntimeException("Emprestimo não encontrado");
+        }
 
         if (emprestimoDevolvido.getStatus() == DEVOLVIDO) {
             throw new RuntimeException("Emprestimo já devolvido!");
@@ -160,23 +176,27 @@ public class EmprestimoService {
         emprestimoDevolvido.getLivro().setDisponibilidade(DISPONIVEL);
         emprestimoDevolvido.setData_devolucao(new Date());
 
-        return emprestimoRepository.save(emprestimoDevolvido);
+        emprestimoDao.update(emprestimoDevolvido);
+        return emprestimoDevolvido;
     }
 
     // método para excluir um emprestimo
     public void removerEmprestimo(Long id) {
-        emprestimoRepository.deleteById(id);
+        emprestimoDao.delete(id);
     }
 
     // método para obter um emprestimo pelo seu id
     public Emprestimo obterEmprestimoPorId(Long id) {
-        return emprestimoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Empréstimo não encontrado com o ID: " + id));
+        Emprestimo emprestimoEncontrado=emprestimoDao.findById(id);
+              if(emprestimoEncontrado==null){
+                 throw new RuntimeException("Empréstimo não encontrado com o ID: " + id);
+              }
+              return emprestimoEncontrado;
     }
 
     // método para obter todos os emprestimos
     public List<Emprestimo> obterTodosEmprestimos() {
-        List<Emprestimo> emprestimos = emprestimoRepository.findAll();
+        List<Emprestimo> emprestimos = emprestimoDao.findAll();
         if (emprestimos.isEmpty()) {
             throw new RuntimeException("Nenhum empréstimo encontrado!");
         }

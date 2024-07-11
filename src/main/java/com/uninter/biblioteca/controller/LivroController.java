@@ -1,6 +1,5 @@
 package com.uninter.biblioteca.controller;
 
-import com.uninter.biblioteca.controller.dto.LivroDTO;
 import com.uninter.biblioteca.model.entity.Livro;
 import com.uninter.biblioteca.service.LivroService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -36,8 +35,8 @@ public class LivroController {
     @ApiResponse(responseCode = "200", description = "Retorna o livro criado",
             content = @Content(mediaType = "application/json", examples = @ExampleObject(value = criarLivroResponse)))
     // rota em si
-    public ResponseEntity<Livro> adicionarLivro(@RequestBody LivroDTO livroDTO) {
-        Livro novoLivro = livroService.adicionarLivro(livroDTO);
+    public ResponseEntity<Livro> adicionarLivro(@RequestBody Livro livro) {
+        Livro novoLivro = livroService.adicionarLivro(livro);
         return ResponseEntity.ok(novoLivro);
     }
 
@@ -50,8 +49,8 @@ public class LivroController {
     @ApiResponse(responseCode = "200", description = "Retorna o livro atualizado",
             content = @Content(mediaType = "application/json", examples = @ExampleObject(value = atualizarLivroResponse)))
     // rota em si
-    public ResponseEntity<Livro> atualizarLivro(@PathVariable Long id, @RequestBody LivroDTO livroDTO) {
-        Livro livroAtualizado = livroService.atualizarLivro(id, livroDTO);
+    public ResponseEntity<Livro> atualizarLivro(@PathVariable Long id, @RequestBody Livro livro) {
+        Livro livroAtualizado = livroService.atualizarLivro(id, livro);
         return ResponseEntity.ok(livroAtualizado);
     }
 

@@ -1,6 +1,5 @@
 package com.uninter.biblioteca.controller;
 
-import com.uninter.biblioteca.controller.dto.EmprestimoDTO;
 import com.uninter.biblioteca.model.entity.Emprestimo;
 import com.uninter.biblioteca.service.EmprestimoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -36,8 +35,8 @@ public class EmprestimoController {
     @ApiResponse(responseCode = "200", description = "Retorna o emprestimo criado",
             content = @Content(mediaType = "application/json", examples = @ExampleObject(value = criarEmprestimoResponse)))
     // rota em si
-    public ResponseEntity<Emprestimo> criarEmprestimo(@RequestBody EmprestimoDTO emprestimoDTO) {
-        Emprestimo novoEmprestimo = emprestimoService.criarEmprestimo(emprestimoDTO);
+    public ResponseEntity<Emprestimo> criarEmprestimo(@RequestBody Emprestimo emprestimo) {
+        Emprestimo novoEmprestimo = emprestimoService.criarEmprestimo(emprestimo);
         return ResponseEntity.ok(novoEmprestimo);
     }
 
@@ -50,8 +49,8 @@ public class EmprestimoController {
     @ApiResponse(responseCode = "200", description = "Retorna o emprestimo atualizado",
             content = @Content(mediaType = "application/json", examples = @ExampleObject(value = atualizarEmprestimoResponse)))
     // rota em si
-    public ResponseEntity<Emprestimo> atualizarEmprestimo(@PathVariable Long id, @RequestBody EmprestimoDTO emprestimoDTO) {
-        Emprestimo emprestimoAtualizado = emprestimoService.atualizarEmprestimo(id, emprestimoDTO);
+    public ResponseEntity<Emprestimo> atualizarEmprestimo(@PathVariable Long id, @RequestBody Emprestimo emprestimo) {
+        Emprestimo emprestimoAtualizado = emprestimoService.atualizarEmprestimo(id, emprestimo);
         return ResponseEntity.ok(emprestimoAtualizado);
     }
 
