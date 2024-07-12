@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 // Ana Leticia Vieira Reis de Carvalho
 // RU: 4106985
@@ -35,8 +36,8 @@ public class EmprestimoController {
     @ApiResponse(responseCode = "200", description = "Retorna o emprestimo criado",
             content = @Content(mediaType = "application/json", examples = @ExampleObject(value = criarEmprestimoResponse)))
     // rota em si
-    public ResponseEntity<Emprestimo> criarEmprestimo(@RequestBody Emprestimo emprestimo) {
-        Emprestimo novoEmprestimo = emprestimoService.criarEmprestimo(emprestimo);
+    public ResponseEntity<Emprestimo> criarEmprestimo(@RequestBody Map<String, Long> emprestimoDados) {
+        Emprestimo novoEmprestimo = emprestimoService.criarEmprestimo(emprestimoDados);
         return ResponseEntity.ok(novoEmprestimo);
     }
 

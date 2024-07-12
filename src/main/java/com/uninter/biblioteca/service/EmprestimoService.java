@@ -7,6 +7,7 @@ import com.uninter.biblioteca.model.dao.UsuarioDaoImpl;
 import com.uninter.biblioteca.model.entity.Emprestimo;
 import com.uninter.biblioteca.model.entity.Livro;
 import com.uninter.biblioteca.model.entity.Usuario;
+import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.stereotype.Service;
 
 // Ana Leticia Vieira Reis de Carvalho
@@ -17,6 +18,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Date;
 import java.text.ParseException;
+import java.util.Map;
 
 import static com.uninter.biblioteca.model.entity.enumeration.Disponibilidade.DISPONIVEL;
 import static com.uninter.biblioteca.model.entity.enumeration.Disponibilidade.INDISPONIVEL;
@@ -71,35 +73,25 @@ public class EmprestimoService {
     }
 
     // método para criar um emprestimo
-    public Emprestimo criarEmprestimo(Emprestimo emprestimo) {
+    public Emprestimo criarEmprestimo(Map<String, Long> emprestimoDados) {
         Emprestimo novoEmprestimo = new Emprestimo();
 
-        Usuario usuario = usuarioDao.findById(emprestimo.getUsuario().getId());
+        Long usuarioId = emprestimoDados.get("usuario_id");
+        Long livroId = emprestimoDados.get("livro_id");
+
+        Usuario usuario = usuarioDao.findById(usuarioId);
         if (usuario == null) {
             throw new RuntimeException("Usuário não encontrado");
         }
 
-        Livro livro = livroDao.findById(emprestimo.getLivro().getId());
-        if(livro==null) {
+        Livro livro = livroDao.findById(livroId);
+        if (livro == null) {
             throw new RuntimeException("Livro não encontrado");
         }
 
-        if (livro.getDisponibilidade() == INDISPONIVEL) {
-            throw new RuntimeException("Livro indisponível para emprestimo");
-        }
-
-        if (emprestimo.getData_emprestimo() != null) {
-            dataEmprestimo = emprestimo.getData_emprestimo();
-        } else {
-            dataEmprestimo = new Date();
-        }
-
-        if (emprestimo.getData_devolucao() != null) {
-           dataDevolucao = emprestimo.getData_devolucao();
-        }
+        Date dataEmprestimo=formataData(new SimpleDateFormat(DATE_FORMAT).format(new Date()));
 
         novoEmprestimo.setData_emprestimo(dataEmprestimo);
-        novoEmprestimo.setData_devolucao(dataDevolucao);
         novoEmprestimo.setUsuario(usuario);
         novoEmprestimo.setLivro(livro);
         novoEmprestimo.setStatus(PENDENTE);
