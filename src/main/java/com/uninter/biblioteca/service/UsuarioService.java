@@ -21,11 +21,11 @@ public class UsuarioService {
 
     // método para criar um usuario
     public Usuario criarUsuario(Usuario usuario) {
-        usuario = new Usuario();
-        usuario.setNome(usuario.getNome());
-        usuario.setEmail(usuario.getEmail());
-        usuario.setCargo(usuario.getCargo());
-        return usuarioDao.save(usuario);
+       Usuario novoUsuario = new Usuario();
+        novoUsuario.setNome(usuario.getNome());
+        novoUsuario.setEmail(usuario.getEmail());
+        novoUsuario.setCargo(usuario.getCargo());
+        return usuarioDao.save(novoUsuario);
     }
 
     // método para adicionar um usuario

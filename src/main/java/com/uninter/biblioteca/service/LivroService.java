@@ -24,17 +24,17 @@ public class LivroService {
 
     // método para criar um livro
     public Livro adicionarLivro(Livro livro) {
-        livro = new Livro();
-        livro.setTitulo(livro.getTitulo());
-        livro.setAutor(livro.getAutor());
-        livro.setIsbn(livro.getIsbn());
-        livro.setGenero(livro.getGenero());
+        Livro novoLivro = new Livro();
+        novoLivro.setTitulo(livro.getTitulo());
+        novoLivro.setAutor(livro.getAutor());
+        novoLivro.setIsbn(livro.getIsbn());
+        novoLivro.setGenero(livro.getGenero());
         if(livro.getDisponibilidade() == null){
-            livro.setDisponibilidade(DISPONIVEL);
+            novoLivro.setDisponibilidade(DISPONIVEL);
         } else {
-            livro.setDisponibilidade(livro.getDisponibilidade());
+            novoLivro.setDisponibilidade(livro.getDisponibilidade());
         }
-        return livroDao.save(livro);
+        return livroDao.save(novoLivro);
     }
 
     // método para atualizar um livro

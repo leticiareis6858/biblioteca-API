@@ -72,7 +72,7 @@ public class EmprestimoService {
 
     // método para criar um emprestimo
     public Emprestimo criarEmprestimo(Emprestimo emprestimo) {
-        emprestimo = new Emprestimo();
+        Emprestimo novoEmprestimo = new Emprestimo();
 
         Usuario usuario = usuarioDao.findById(emprestimo.getUsuario().getId());
         if (usuario == null) {
@@ -94,22 +94,19 @@ public class EmprestimoService {
             dataEmprestimo = new Date();
         }
 
-        emprestimo.setData_emprestimo(dataEmprestimo);
-
         if (emprestimo.getData_devolucao() != null) {
            dataDevolucao = emprestimo.getData_devolucao();
-            emprestimo.setData_devolucao(dataDevolucao);
         }
 
-        emprestimo.setData_emprestimo(dataEmprestimo);
-        emprestimo.setData_devolucao(dataDevolucao);
-        emprestimo.setUsuario(usuario);
-        emprestimo.setLivro(livro);
-        emprestimo.setStatus(PENDENTE);
+        novoEmprestimo.setData_emprestimo(dataEmprestimo);
+        novoEmprestimo.setData_devolucao(dataDevolucao);
+        novoEmprestimo.setUsuario(usuario);
+        novoEmprestimo.setLivro(livro);
+        novoEmprestimo.setStatus(PENDENTE);
         livro.setDisponibilidade(INDISPONIVEL);
 
-        emprestimoDao.save(emprestimo);
-        return emprestimo;
+        emprestimoDao.save(novoEmprestimo);
+        return novoEmprestimo;
     }
 
     // método para atualizar um emprestimo
