@@ -18,9 +18,9 @@ Esse projeto foi desenvolvido usando as seguintes tecnologias: _Java 17_, _Sprin
 
 Com essa aplicação é possivel:
 
-- Cadastrar, atualizar, excluir e buscar livros;
+- Cadastrar, atualizar, emprestar, excluir e buscar livros;
 - Cadastrar, atualizar, excluir e buscar usuários;
-- Cadastrar, atualizar, excluir e buscar empréstimos;
+- Cadastrar, atualizar, devolver, excluir e buscar empréstimos;
 
 ## 🛠️ Como configurar a aplicação:
 
@@ -33,5 +33,5 @@ Com essa aplicação é possivel:
 ## 👩‍💻 Como usar:
 
 1. Execute a classe `BibliotecaApiAplication.java`.
-2. Utilize o _Postman_ para usar as rotas da aplicação.
+2. Utilize o _Postman_ para usar as rotas da aplicação. **OU**
 3. Acesse `http://localhost:8080/swagger-ui.html` para verificar as rotas da API.
