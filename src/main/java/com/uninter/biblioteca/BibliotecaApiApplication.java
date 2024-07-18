@@ -12,11 +12,9 @@ import org.springframework.context.annotation.ComponentScan;
 // anotação que define os pacotes da aplicação que serão escaneados
 @ComponentScan(basePackages = {
 		"com.uninter.biblioteca.controller",
-		"com.uninter.biblioteca.controller.dto",
 		"com.uninter.biblioteca.model",
+		"com.uninter.biblioteca.model.dao",
 		"com.uninter.biblioteca.model.entity",
-		"com.uninter.biblioteca.model.enumeration",
-		"com.uninter.biblioteca.repository",
 		"com.uninter.biblioteca.service",
 		"com.uninter.biblioteca.swagger"})
 public class BibliotecaApiApplication {
