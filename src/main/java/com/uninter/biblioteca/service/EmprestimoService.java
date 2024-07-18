@@ -7,7 +7,6 @@ import com.uninter.biblioteca.model.dao.UsuarioDaoImpl;
 import com.uninter.biblioteca.model.entity.Emprestimo;
 import com.uninter.biblioteca.model.entity.Livro;
 import com.uninter.biblioteca.model.entity.Usuario;
-import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.stereotype.Service;
 
 // Ana Leticia Vieira Reis de Carvalho
@@ -130,12 +129,11 @@ public class EmprestimoService {
         }
 
         if (emprestimo.getData_devolucao() != null) {
-            dataDevolucao = emprestimo.getData_devolucao();
-            emprestimoExistente.setData_devolucao(dataDevolucao);
+            throw new RuntimeException("Data de devolução não pode ser alterada!");
         }
 
         if (emprestimo.getStatus() != null) {
-            emprestimoExistente.setStatus(emprestimo.getStatus());
+            throw new RuntimeException("Status não pode ser alterado! Para isso use a rota de devolver empréstimo.");
         }
 
         emprestimoDao.update(emprestimoExistente);
