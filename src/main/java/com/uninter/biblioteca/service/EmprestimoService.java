@@ -1,6 +1,5 @@
 package com.uninter.biblioteca.service;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.uninter.biblioteca.model.dao.EmprestimoDaoImpl;
 import com.uninter.biblioteca.model.dao.LivroDaoImpl;
 import com.uninter.biblioteca.model.dao.UsuarioDaoImpl;
@@ -37,14 +36,6 @@ public class EmprestimoService {
 
     // define o formato de data para dd-mm-yyyy
     private static final String DATE_FORMAT = "dd-MM-yyyy";
-
-    // define o formato de data_emprestimo para dd-mm-yyyy
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    private Date dataEmprestimo;
-
-    // define o formato de data_devolucao para dd-mm-yyyy
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    private Date dataDevolucao;
 
     public EmprestimoService(EmprestimoDaoImpl emprestimoDao, LivroDaoImpl livroDao, UsuarioDaoImpl usuarioDao) {
         this.emprestimoDao = emprestimoDao;
