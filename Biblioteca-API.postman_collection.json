@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "fb53e6fe-e2f9-4f0c-85f7-9da2acc5c19d",
+		"_postman_id": "9a916f01-8968-4dcb-b28a-b110561663ed",
 		"name": "Biblioteca-API",
 		"description": "Collection para uma REST API de uma biblioteca.\n\nDesenvolvido por Ana Leticia V.R. de Carvalho para a disciplina de Linguagem de Programação.\n\nCódigo da API disponível em: [https://github.com/leticiareis6858/biblioteca-API](https://github.com/leticiareis6858/biblioteca-API)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -17,7 +17,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\":\"\",\r\n    \"email\":\"\",\r\n    \"cargo\":\"\"\r\n}\r\n// Cargo pode ser: ADMIN, BIBLIOTECARIO, LEITOR",
+							"raw": "{\r\n    \"nome\":\"ana\",\r\n    \"email\":\"ana@4106985.com\",\r\n    \"cargo\":\"LEITOR\"\r\n}\r\n// Cargo pode ser: BIBLIOTECARIO, LEITOR",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -45,7 +45,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\":\"\",\r\n    \"email\":\"\",\r\n    \"cargo\":\"\"\r\n}\r\n\r\n// Pode atualizar quantos e quaisquer campos",
+							"raw": "{\r\n    \"nome\":\"ana leticia\",\r\n    \"email\":\"analeticia@4106985.com\"\r\n}\r\n\r\n// Pode atualizar quantos e quaisquer campos (menos o cargo)",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -66,7 +66,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "1"
 								}
 							]
 						}
@@ -92,7 +92,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "1"
 								}
 							]
 						}
@@ -117,7 +117,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "1"
 								}
 							]
 						}
@@ -155,7 +155,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"titulo\":\"\",\r\n    \"autor\":\"\",\r\n    \"isbn\":\"\",\r\n    \"genero\":\"\"\r\n}\r\n\r\n// Não é necessário informar a disponibilidade.\r\n// Disponibilidade pode ser: DISPONIVEL ou INDISPONIVEL",
+							"raw": "{\r\n    \"titulo\":\"Nausicaä do Vale do Vento - Volume 1\",\r\n    \"autor\":\"Hayo Miyazaki\",\r\n    \"isbn\":\"9786555942521\",\r\n    \"genero\":\"fantasia\"\r\n}\r\n\r\n// Não é necessário informar a disponibilidade.\r\n// Disponibilidade pode ser: DISPONIVEL ou INDISPONIVEL",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -183,7 +183,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"titulo\":\"\",\r\n    \"autor\":\"\",\r\n    \"isbn\":\"\",\r\n    \"genero\":\"\"\r\n}\r\n\r\n// Pode atualizar quantos e quaisquer campos",
+							"raw": "{\r\n    //\"titulo\":\"\",\r\n    \"autor\":\"Hayao Miyazaki\"//,\r\n    //\"isbn\":\"\",\r\n    //\"genero\":\"\"\r\n}\r\n\r\n// Pode atualizar quantos e quaisquer campos",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -204,7 +204,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "1"
 								}
 							]
 						}
@@ -230,7 +230,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "1"
 								}
 							]
 						}
@@ -255,7 +255,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "1"
 								}
 							]
 						}
@@ -293,7 +293,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"usuario_id\": ,\r\n    \"livro_id\": ,\r\n}\r\n\r\n// Não precisa informar a data_devolucao e nem a data_criacao\r\n",
+							"raw": "{\r\n    \"usuario_id\": 1,\r\n    \"livro_id\": 1\r\n}\r\n\r\n// Não precisa informar a data_devolucao e nem a data_criacao\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -333,7 +333,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "1"
 								}
 							]
 						}
@@ -347,7 +347,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"usuario_id\": ,\r\n    \"livro_id\": ,\r\n    \"data_criacao\": \"dd-mm-yyyy\",\r\n    \"data_devolucao\": \"dd-mm-yyyy\"\r\n}\r\n\r\n// Pode atualizar quantos e quaisquer campos\r\n// As datas precisam estar no formato dd-mm-yyyy",
+							"raw": "{\r\n    \"usuario_id\": \"2\"\r\n   // \"livro_id\": ,\r\n  //  \"data_criacao\": \"dd-mm-yyyy\",\r\n  //  \"data_devolucao\": \"dd-mm-yyyy\"\r\n}\r\n\r\n// Pode atualizar quantos e quaisquer campos\r\n// As datas precisam estar no formato dd-mm-yyyy",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -368,7 +368,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "3"
 								}
 							]
 						}
@@ -394,7 +394,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "1"
 								}
 							]
 						}
@@ -419,7 +419,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "1"
 								}
 							]
 						}
