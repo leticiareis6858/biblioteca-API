@@ -108,10 +108,12 @@ public class EmprestimoService {
         }
 
         if (emprestimoDados.containsKey("livro_id")) {
+            emprestimoExistente.getLivro().setDisponibilidade(DISPONIVEL);
             Long livroId = Long.parseLong(emprestimoDados.get("livro_id").toString());
             Livro livro = livroDao.findById(livroId);
             if (livro != null) {
                 emprestimoExistente.setLivro(livro);
+                emprestimoExistente.getLivro().setDisponibilidade(INDISPONIVEL);
             }
         }
 
@@ -121,18 +123,11 @@ public class EmprestimoService {
         }
 
         if (emprestimoDados.containsKey("data_devolucao")) {
-            Date dataDevolucao = formataData(emprestimoDados.get("data_devolucao").toString());
-            emprestimoExistente.setData_devolucao(dataDevolucao);
+           throw new RuntimeException("Data de devolução não pode ser alterada! Para isso use a rota de devolver empréstimo.");
         }
 
         if (emprestimoDados.containsKey("status")) {
-            String statusStr = emprestimoDados.get("status").toString();
-            try {
-                Status status = Status.valueOf(statusStr.toUpperCase());
-                emprestimoExistente.setStatus(status);
-            } catch (IllegalArgumentException e) {
-                throw new RuntimeException("Status inválido: " + statusStr);
-            }
+            throw new RuntimeException("Status não pode ser alterado! Para isso use a rota de devolver empréstimo.");
         }
 
         emprestimoDao.update(emprestimoExistente);
