@@ -5,7 +5,6 @@ package com.uninter.biblioteca.model.entity.enumeration;
 
 // enum para os cargos dos usuarios
 public enum Cargo {
-    ADMIN,
     BIBLIOTECARIO,
     LEITOR
 }
