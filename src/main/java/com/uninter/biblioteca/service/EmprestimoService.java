@@ -7,6 +7,7 @@ import com.uninter.biblioteca.model.dao.UsuarioDaoImpl;
 import com.uninter.biblioteca.model.entity.Emprestimo;
 import com.uninter.biblioteca.model.entity.Livro;
 import com.uninter.biblioteca.model.entity.Usuario;
+import com.uninter.biblioteca.model.entity.enumeration.Status;
 import org.springframework.stereotype.Service;
 
 // Ana Leticia Vieira Reis de Carvalho
@@ -101,39 +102,46 @@ public class EmprestimoService {
     }
 
     // método para atualizar um emprestimo
-    public Emprestimo atualizarEmprestimo(Long id, Emprestimo emprestimo) {
+    public Emprestimo atualizarEmprestimo(Long id, Map<String, Object> emprestimoDados) {
         Emprestimo emprestimoExistente = emprestimoDao.findById(id);
         if (emprestimoExistente == null) {
-           throw new RuntimeException("Emprestimo não encontrado com o ID: " + id);
+            throw new RuntimeException("Emprestimo não encontrado com o ID: " + id);
         }
 
-        if (emprestimo.getUsuario() != null) {
-            Usuario usuario = usuarioDao.findById(emprestimo.getUsuario().getId());
-            if (usuario == null) {
-                throw new RuntimeException("Usuário não encontrado");
+        if (emprestimoDados.containsKey("usuario_id")) {
+            Long usuarioId = Long.parseLong(emprestimoDados.get("usuario_id").toString());
+            Usuario usuario = usuarioDao.findById(usuarioId);
+            if (usuario != null) {
+                emprestimoExistente.setUsuario(usuario);
             }
-            emprestimoExistente.setUsuario(usuario);
         }
 
-        if (emprestimo.getLivro() != null) {
-            Livro livro = livroDao.findById(emprestimo.getLivro().getId());
-            if (livro == null) {
-               throw new RuntimeException("Livro não encontrado");
+        if (emprestimoDados.containsKey("livro_id")) {
+            Long livroId = Long.parseLong(emprestimoDados.get("livro_id").toString());
+            Livro livro = livroDao.findById(livroId);
+            if (livro != null) {
+                emprestimoExistente.setLivro(livro);
             }
-            emprestimoExistente.setLivro(livro);
         }
 
-        if (emprestimo.getData_emprestimo() != null) {
-            dataEmprestimo = emprestimo.getData_emprestimo();
+        if (emprestimoDados.containsKey("data_emprestimo")) {
+            Date dataEmprestimo = formataData(emprestimoDados.get("data_emprestimo").toString());
             emprestimoExistente.setData_emprestimo(dataEmprestimo);
         }
 
-        if (emprestimo.getData_devolucao() != null) {
-            throw new RuntimeException("Data de devolução não pode ser alterada!");
+        if (emprestimoDados.containsKey("data_devolucao")) {
+            Date dataDevolucao = formataData(emprestimoDados.get("data_devolucao").toString());
+            emprestimoExistente.setData_devolucao(dataDevolucao);
         }
 
-        if (emprestimo.getStatus() != null) {
-            throw new RuntimeException("Status não pode ser alterado! Para isso use a rota de devolver empréstimo.");
+        if (emprestimoDados.containsKey("status")) {
+            String statusStr = emprestimoDados.get("status").toString();
+            try {
+                Status status = Status.valueOf(statusStr.toUpperCase());
+                emprestimoExistente.setStatus(status);
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException("Status inválido: " + statusStr);
+            }
         }
 
         emprestimoDao.update(emprestimoExistente);
