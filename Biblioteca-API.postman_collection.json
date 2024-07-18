@@ -347,7 +347,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"usuario_id\": \"2\"\r\n   // \"livro_id\": ,\r\n  //  \"data_criacao\": \"dd-mm-yyyy\",\r\n  //  \"data_devolucao\": \"dd-mm-yyyy\"\r\n}\r\n\r\n// Pode atualizar quantos e quaisquer campos\r\n// As datas precisam estar no formato dd-mm-yyyy",
+							"raw": "{\r\n    \"usuario_id\": \"2\"\r\n   // \"livro_id\": ,\r\n  //  \"data_criacao\": \"dd-mm-yyyy\",\r\n}\r\n\r\n// Pode atualizar quantos e quaisquer campos, desde que não seja a data de devolução e nem o status\r\n// A data precisa estar no formato dd-mm-yyyy",
 							"options": {
 								"raw": {
 									"language": "json"
